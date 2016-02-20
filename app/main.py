@@ -186,8 +186,6 @@ def start():
         'taunt': 'INFERNAL DINOSAUR'
     }
 
-def
-
 @bottle.post('/move')
 def move():
     data = bottle.request.json
