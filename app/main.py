@@ -36,7 +36,7 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
-
+    print data
     return {
         'move': 'north',
         'taunt': 'battlesnake-python!'
