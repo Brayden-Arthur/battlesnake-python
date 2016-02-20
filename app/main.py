@@ -94,6 +94,11 @@ def getHead():
     return snake.coords[0]
 
 def getDanger(x,y,map):
+    if x < 0 or x >= len(map[y]):
+        return 1.0
+    if y < 0 or y >= len(map):
+        return 1.0
+        
     tile = grid[y][x]
     if isinstance(grid, Danger):
         return tile.val
@@ -192,10 +197,10 @@ def move():
     map = getMap(data)
     move = 'north'
     head = getHead()
-    north = getDanger(head[0] - 1,head[1])
-    south = getDanger(head[0] + 1,head[1])
-    east = getDanger(head[0],head[1] + 1)
-    west = getDanger(head[0],head[1] - 1)
+    north = getDanger(head[0] - 1,head[1], map)
+    south = getDanger(head[0] + 1,head[1], map)
+    east = getDanger(head[0],head[1] + 1 , map)
+    west = getDanger(head[0],head[1] - 1 , map)
 
     lowestDanger = min(north,south,east,west)
     if(lowestDanger == north):
