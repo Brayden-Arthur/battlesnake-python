@@ -199,13 +199,13 @@ def move():
     west = getDanger(head[0],head[1] - 1)
 
     lowestDanger = min(north,south,east,west)
-    if(lowestDanger = north):
+    if(lowestDanger == north):
         move = 'north'
-    elif(lowestDanger = south):
+    elif(lowestDanger == south):
         move = 'south'
-    elif(lowestDanger = east):
+    elif(lowestDanger == east):
         move = 'east'
-    if(lowestDanger = west):
+    if(lowestDanger == west):
         move = 'west'
 
     return {
