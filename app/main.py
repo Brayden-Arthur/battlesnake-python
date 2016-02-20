@@ -104,7 +104,7 @@ def addDanger(d1, d2):
     return 1.0 - ((1.0 - d1) * (1.0 - d2))
 
 
-def getmap(data):
+def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
 
     for snake in data['snakes']:
@@ -189,6 +189,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    map = getMap)
     move = 'north'
     head = getHead()
     north = getDanger(head[0] - 1,head[1])
