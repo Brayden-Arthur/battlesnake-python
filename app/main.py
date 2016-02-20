@@ -34,10 +34,8 @@ class Snake(object):
         self.name = name
         self.head = SnakePart(self, True)
         self.body = SnakePart(self, False)
-
     def __str__(self):
         return self.name
-
     def __repr__(self):
         return self.__str__()
 
@@ -127,7 +125,6 @@ def start():
 
 @bottle.post('/move')
 def move():
-    move = ''
     data = bottle.request.json
     move = 'north'
 
