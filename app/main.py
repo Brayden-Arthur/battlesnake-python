@@ -1,6 +1,8 @@
 import bottle
 import os
 
+currentPlan = 0
+
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -19,6 +21,12 @@ def index():
         'head': head_url
     }
 
+def run():
+
+def food():
+
+def attack():
+
 
 @bottle.post('/start')
 def start():
@@ -27,22 +35,30 @@ def start():
     # TODO: Do things with data
 
     return {
-        'taunt': 'battlesnake-python!'
+        'taunt': 'INFERNAL DINOSAUR'
     }
 
 
 @bottle.post('/move')
 def move():
+    move = ''
     data = bottle.request.json
+    if(health < 15):
+        food(move)
 
     # TODO: Do things with data
-    print data
+
+
     return {
         'move': 'north',
         'taunt': 'battlesnake-python!'
     }
 
-
+#protect the coins,
+#f99aee30-ec8b-4c28-b8c0-49df0e73080b
+#us
+#mostly ignore food until < 70 hitpoints
+#
 @bottle.post('/end')
 def end():
     data = bottle.request.json
