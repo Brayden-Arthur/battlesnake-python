@@ -189,7 +189,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    map = getMap)
+    map = getMap()
     move = 'north'
     head = getHead()
     north = getDanger(head[0] - 1,head[1])
@@ -198,6 +198,7 @@ def move():
     west = getDanger(head[0],head[1] - 1)
 
     lowestDanger = min(north,south,east,west)
+    
     if(lowestDanger == north):
         move = 'north'
     elif(lowestDanger == south):
