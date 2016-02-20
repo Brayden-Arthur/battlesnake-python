@@ -25,6 +25,7 @@ class Coin(object):
 
 class Health(object):
     def __init__(self, id, name):
+        pass
 
 
 class Snake(object):
