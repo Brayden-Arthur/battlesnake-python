@@ -2,6 +2,7 @@ import bottle
 import os
 import random
 
+#Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
         self.baseDanger = 0.2
@@ -12,7 +13,7 @@ class Wall(object):
     def __repr__(self):
         return self.__str__()
 
-
+#danger value for the food
 class Food(object):
     def __init__(self):
         self.baseDanger = -0.75
@@ -32,11 +33,11 @@ class Coin(object):
 
     def __repr__(self):
         return self.__str__()
-
+#when running out, run for the food
 class Health(object):
     def __init__(self, id, name):
         pass
-
+#move according to the danger
 class Danger(object):
     def __init__(self, dangerVal):
         self.val = dangerVal
