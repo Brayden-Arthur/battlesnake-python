@@ -137,7 +137,7 @@ def getMap(data):
         grid[coin[1]][coin[0]] = Map.coin
 
     for food in data.get('food', []):
-        grid[food[1]][food[0]] = Map.food
+        grid[food[1]][food[0]] = Food()
 
 
     for y in range(len(grid)):
