@@ -1,8 +1,6 @@
 import bottle
 import os
 
-currentplan = 0
-
 class Wall(object):
     def __str__(self):
         return "W"
