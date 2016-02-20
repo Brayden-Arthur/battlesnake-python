@@ -23,10 +23,6 @@ class Coin(object):
     def __repr__(self):
         return self.__str__()
 
-class Health(object):
-    def __init__(self, id, name):
-        pass
-
 
 class Snake(object):
     def __init__(self, id, name):
@@ -122,17 +118,31 @@ def start():
         'taunt': 'INFERNAL DINOSAUR'
     }
 
+def
 
 @bottle.post('/move')
 def move():
     data = bottle.request.json
     move = 'north'
+    head = getHead()
+    north = getDanger(head[0] - 1,head[1])
+    south = getDanger(head[0] + 1,head[1])
+    east = getDanger(head[0],head[1] + 1)
+    west = getDanger(head[0],head[1] - 1)
 
-    # TODO: Do things with data
+    lowestDanger = min(north,south,east,west)
+    if(lowestDanger = north):
+        move = 'north'
+    elif(lowestDanger = south):
+        move = 'south'
+    elif(lowestDanger = east):
+        move = 'east'
+    if(lowestDanger = west):
+        move = 'west'
 
     return {
         'move': move,
-        'taunt': 'nom'
+        'taunt': '420 blaze it'
     }
 
 
