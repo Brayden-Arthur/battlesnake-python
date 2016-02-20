@@ -220,37 +220,37 @@ def end():
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 if __name__ == '__main__':
-    #bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
-    print getmap({
-        'height': 4,
-        'width': 4,
-        'snakes': [
-            {
-                'id': Map.mysnakeid,
-                'name': 'Snake name',
-                'status': 'alive',
-                'coords': [
-                    [1, 1], [1, 2]
-                ]
-            },
-            {
-                'id': 'lol',
-                'name': 'lol snake',
-                'status': 'alive',
-                'coords': [
-                    [2,1], [3, 1]
-                ]
-            }
-        ],
-        'walls' : [
-            [2,2],
-            [2,3]
-        ],
-        'food': [
-            [0,0]
-        ],
-        'gold': [
-            [1,0]
-        ]
-    })
-    print getHead()
+    bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
+    #print getmap({
+    #    'height': 4,
+    #    'width': 4,
+    #    'snakes': [
+    #        {
+    #            'id': Map.mysnakeid,
+    #            'name': 'Snake name',
+    #            'status': 'alive',
+    #            'coords': [
+    #                [1, 1], [1, 2]
+    #            ]
+    #        },
+    #        {
+    #            'id': 'lol',
+    #            'name': 'lol snake',
+    #            'status': 'alive',
+    #            'coords': [
+    #                [2,1], [3, 1]
+    #            ]
+    #        }
+    #    ],
+    #    'walls' : [
+    #        [2,2],
+    #        [2,3]
+    #    ],
+    #    'food': [
+    #        [0,0]
+    #    ],
+    #    'gold': [
+    #        [1,0]
+    #    ]
+    #})
+    #print getHead()
