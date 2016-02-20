@@ -76,17 +76,15 @@ def getmap(data):
                 snakepart = snakeobj.head
             grid[coord[1]][coord[0]] = snakepart
             hasBeenHead = True
-    if 'walls' in data
-        for wall in data.get('walls', []):
-            grid[wall[1]][wall[0]] = Map.wall
             
-    if 'coin' in data 
-        for coin in data.get('gold', []):
-            grid[coin[1]][coin[0]] = Map.coin
-    
-    if 'food' in data
-        for food in data.get('food', []):
-            grid[food[1]][food[0]] = Map.food
+    for wall in data.get('walls', []):
+        grid[wall[1]][wall[0]] = Map.wall
+        
+    for coin in data.get('gold', []):
+        grid[coin[1]][coin[0]] = Map.coin
+
+    for food in data.get('food', []):
+        grid[food[1]][food[0]] = Map.food
     
     return grid
     
