@@ -14,7 +14,8 @@ class Wall(object):
 
 class Food(object):
     def __init__(self):
-        self.baseDanger = 0.0
+        self.baseDanger = -0.5
+        self.val = -0.5
 
     def __str__(self):
         return "F"
@@ -93,20 +94,24 @@ def getHead():
     snake = Map.snakes[Map.mysnakeid]
     return snake.coords[0]
 
-def getDanger(x,y,map):
-    if x < 0 or x >= len(map[y]):
-        return 1.0
-    if y < 0 or y >= len(map):
-        return 1.0
+def getDanger(x,y,grid):
+    if y < 0 or y >= len(grid):
+        print "invalid y"
+        return 1000000.0
+    if x < 0 or x >= len(grid[y]):
+        print "invalid x"
+        return 1000000.0
         
     tile = grid[y][x]
-    if isinstance(grid, Danger):
+    if isinstance(tile, Danger) or isinstance(tile, Food):
+        print "tile val"
         return tile.val
     else:
-        return 1.0
+        print "something else"
+        return 1000000.0
 
 def addDanger(d1, d2):
-    return 1.0 - ((1.0 - d1) * (1.0 - d2))
+    return d1 + d2
 
 
 def getMap(data):
@@ -138,7 +143,7 @@ def getMap(data):
     for y in range(len(grid)):
         for x in range(len(grid[y])):
             tile = grid[y][x]
-            if isinstance(tile, Danger):
+            if isinstance(tile, Danger) or isinstance(tile, Food):
                 for d in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
                     yy = d[0] + y
                     xx = d[1] + x
@@ -197,10 +202,10 @@ def move():
     map = getMap(data)
     move = 'north'
     head = getHead()
-    north = getDanger(head[0] - 1,head[1], map)
-    south = getDanger(head[0] + 1,head[1], map)
-    east = getDanger(head[0],head[1] + 1 , map)
-    west = getDanger(head[0],head[1] - 1 , map)
+    west = getDanger(head[0] - 1,head[1], map)
+    east = getDanger(head[0] + 1,head[1], map)
+    north = getDanger(head[0],head[1] - 1 , map)
+    south = getDanger(head[0],head[1] + 1 , map)
 
     lowestDanger = min(north,south,east,west)
     if(lowestDanger == north):
@@ -211,6 +216,8 @@ def move():
         move = 'east'
     if(lowestDanger == west):
         move = 'west'
+        
+    print "%f %f %f %f %f" % (north, south, west, east, lowestDanger)
 
     return {
         'move': move,
