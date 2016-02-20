@@ -21,11 +21,18 @@ def index():
         'head': head_url
     }
 
-def run():
+#maneuvers
+def zigzag():
 
-def food():
 
-def attack():
+def run(move):
+
+
+def food(move):
+
+
+def attack(move):
+
 
 
 @bottle.post('/start')
