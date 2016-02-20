@@ -9,39 +9,40 @@ class Wall(object):
 
     def __repr__(self):
         return self.__str__()
-        
+
+
 class Food(object):
     def __str__(self):
         return "F"
 
     def __repr__(self):
         return self.__str__()
-        
+
 class Coin(object):
     def __str__(self):
         return "C"
 
     def __repr__(self):
         return self.__str__()
-        
+
 class Snake(object):
     def __init__(self, id, name):
         self.id = id
         self.name = name
         self.head = SnakePart(self, True)
         self.body = SnakePart(self, False)
-    
+
     def __str__(self):
         return self.name
 
     def __repr__(self):
         return self.__str__()
-        
+
 class SnakePart(object):
     def __init__(self, snake, ishead):
         self.snake = snake
         self.ishead = ishead
-    
+
     def __str__(self):
         headstr = ""
         if self.ishead:
@@ -49,7 +50,7 @@ class SnakePart(object):
         else:
             headstr = "(B)"
         return self.snake.__str__() + headstr
-    
+
     def __repr__(self):
         return self.__str__()
 
@@ -61,11 +62,12 @@ class Map(object):
     food = Food()
     coin = Coin()
     wall = Wall()
+    #danger = Danger()
 
-    
+
 def getmap(data):
     grid = [[Map.empty for x in range(data["width"])] for y in range(data["height"])]
-    
+
     for snake in data['snakes']:
         snakeobj =  Snake(snake['id'], snake['name'])
         Map.snakes[snake['id']] = snakeobj
@@ -78,18 +80,18 @@ def getmap(data):
                 snakepart = snakeobj.head
             grid[coord[1]][coord[0]] = snakepart
             hasBeenHead = True
-            
+
     for wall in data.get('walls', []):
         grid[wall[1]][wall[0]] = Map.wall
-        
+
     for coin in data.get('gold', []):
         grid[coin[1]][coin[0]] = Map.coin
 
     for food in data.get('food', []):
         grid[food[1]][food[0]] = Map.food
-    
+
     return grid
-    
+
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -116,22 +118,31 @@ def start():
     # TODO: Do things with data
 
     return {
-        'taunt': 'battlesnake-python!'
+        'taunt': 'INFERNAL DINOSAUR'
     }
 
 
 @bottle.post('/move')
 def move():
+    move = ''
     data = bottle.request.json
+    if(health < 15):
+        move = 'north'
 
     # TODO: Do things with data
-    print getmap(data)
+
     return {
-        'move': 'north',
+        'move': move,
         'taunt': 'battlesnake-python!'
     }
 
 
+
+#protect the coins,
+#f99aee30-ec8b-4c28-b8c0-49df0e73080b
+#us
+#mostly ignore food until < 70 hitpoints
+#
 @bottle.post('/end')
 def end():
     data = bottle.request.json
@@ -171,60 +182,6 @@ if __name__ == '__main__':
 #            [1,0]
 #        ]
 #    })
-#maneuvers
-def zigzag():
-
-
-def run(move):
-
-
-def food(move):
-
-
-def attack(move):
-
-
-
-@bottle.post('/start')
-def start():
-    data = bottle.request.json
-
-    # TODO: Do things with data
-
-    return {
-        'taunt': 'INFERNAL DINOSAUR'
-    }
-
-
-@bottle.post('/move')
-def move():
-    move = ''
-    data = bottle.request.json
-    if(health < 15):
-        food(move)
-
-    # TODO: Do things with data
-
-
-    return {
-        'move': 'north',
-        'taunt': 'battlesnake-python!'
-    }
-
-#protect the coins,
-#f99aee30-ec8b-4c28-b8c0-49df0e73080b
-#us
-#mostly ignore food until < 70 hitpoints
-#
-@bottle.post('/end')
-def end():
-    data = bottle.request.json
-
-    # TODO: Do things with data
-
-    return {
-        'taunt': 'battlesnake-python!'
-    }
 
 
 # Expose WSGI app (so gunicorn can find it)
