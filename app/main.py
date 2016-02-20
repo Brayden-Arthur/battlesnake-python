@@ -25,6 +25,10 @@ class Coin(object):
     def __repr__(self):
         return self.__str__()
 
+class Health(object):
+    def __init__(self, id, name):
+
+
 class Snake(object):
     def __init__(self, id, name):
         self.id = id
@@ -126,14 +130,13 @@ def start():
 def move():
     move = ''
     data = bottle.request.json
-    if(health < 15):
-        move = 'north'
+    move = 'north'
 
     # TODO: Do things with data
 
     return {
         'move': move,
-        'taunt': 'battlesnake-python!'
+        'taunt': 'nom'
     }
 
 
