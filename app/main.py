@@ -1,5 +1,6 @@
 import bottle
 import os
+import random
 
 class Wall(object):
     def __init__(self):
@@ -14,8 +15,8 @@ class Wall(object):
 
 class Food(object):
     def __init__(self):
-        self.baseDanger = -0.5
-        self.val = -0.5
+        self.baseDanger = -0.75
+        self.val = -0.75
 
     def __str__(self):
         return "F"
@@ -65,9 +66,9 @@ class SnakePart(object):
         self.snake = snake
         self.ishead = ishead
         if ishead:
-            self.baseDanger = 0.5
+            self.baseDanger = 3.0
         else:
-            self.baseDanger = 0.3
+            self.baseDanger = 1.0
 
     def __str__(self):
         headstr = ""
@@ -99,15 +100,12 @@ def getDanger(x,y,grid):
         print "invalid y"
         return 1000000.0
     if x < 0 or x >= len(grid[y]):
-        print "invalid x"
         return 1000000.0
         
     tile = grid[y][x]
     if isinstance(tile, Danger) or isinstance(tile, Food):
-        print "tile val"
         return tile.val
     else:
-        print "something else"
         return 1000000.0
 
 def addDanger(d1, d2):
@@ -116,6 +114,8 @@ def addDanger(d1, d2):
 
 def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
+    width = data['width']
+    height = data['height']
 
     for snake in data['snakes']:
         snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
@@ -153,20 +153,34 @@ def getMap(data):
                     addedDanger = grid[yy][xx].baseDanger
                     tile.val = addDanger(tile.val, addedDanger)
 
-    for y in [0, len(grid) - 1]:
-        for x in range(len(grid[y])):
-            tile = grid[y][x]
-            if isinstance(tile, Danger):
-                tile.val = addDanger(tile.val, 0.3)
+    for hh in range((height - 2) // 2):
+        for y in [0, len(grid) - 1 - hh]:
+            for x in range(len(grid[y])):
+                tile = grid[y][x]
+                if isinstance(tile, Danger):
+                    tile.val = addDanger(tile.val, (0.5 ** hh) * 0.4)
 
-    for y in range(len(grid)):
-        for x in [0, len(grid[y]) - 1]:
-            tile = grid[y][x]
-            if isinstance(tile, Danger):
-                tile.val = addDanger(tile.val, 0.3)
+    for ww in range((width - 2) // 2):
+        for y in range(len(grid)):
+            for x in [0, len(grid[y]) - 1 - ww]:
+                tile = grid[y][x]
+                if isinstance(tile, Danger):
+                    tile.val = addDanger(tile.val, (0.5 ** ww) * 0.4)
 
     return grid
 
+def getTaunt():
+    return random.choice(["\"eval(", 
+                            "UNDEFINED",
+                            "42",
+                            ";DROPTABLE SNAKES",
+                            "420 blaze it",
+                            "#yolo",
+                            "potato",
+                            "Casting Pyroblast - 4.9s",
+                            "no bombs now",
+                            "\\",
+                            ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -217,11 +231,13 @@ def move():
     if(lowestDanger == west):
         move = 'west'
         
+    taunt = getTaunt()
+        
     print "%f %f %f %f %f" % (north, south, west, east, lowestDanger)
 
     return {
         'move': move,
-        'taunt': '420 blaze it'
+        'taunt': taunt
     }
 
 
