@@ -211,7 +211,7 @@ def getTaunt():
                             "potato",
                             "Casting Pyroblast - 5.0",
                             "no bombs now",
-                            "\\\\\\\\\\\\\\\\\\\\\",
+                            "\\\\\\\\\\\\\\\\\\\\",
                             ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
     if(currentTaunt == 'Casting Pyroblast - 5.0'):
         currentTaunt = 'Casting Pyroblast - 4.0'
