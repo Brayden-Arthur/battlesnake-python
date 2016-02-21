@@ -2,8 +2,8 @@ import bottle
 import os
 import random
 
-tauntValue = 0
-currentTaunt = ''
+global tauntValue = 0
+global currentTaunt = ''
 #Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
