@@ -2,6 +2,8 @@ import bottle
 import os
 import random
 
+tauntValue = 0
+currentTaunt = ''
 #Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
@@ -125,7 +127,6 @@ def getDanger(x,y,grid):
         return 1000000.0
     if x < 0 or x >= len(grid[y]):
         return 1000000.0
-        
     tile =  grid[y][x]
     if isLegalTile(tile):
         danger = 0.0
@@ -200,7 +201,8 @@ def getMap(data):
     return grid
 
 def getTaunt():
-    return random.choice(["\"eval(", 
+    if(tauntValue % 3 == 0):
+        currentTaunt = random.choice(["\"eval(",
                             "UNDEFINED",
                             "42",
                             ";DROPTABLE SNAKES",
@@ -211,6 +213,7 @@ def getTaunt():
                             "no bombs now",
                             "\\",
                             ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
+    return currentTaunt
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -260,9 +263,9 @@ def move():
         move = 'east'
     if(lowestDanger == west):
         move = 'west'
-        
+
     taunt = getTaunt()
-        
+
     print "%f %f %f %f %f" % (north, south, west, east, lowestDanger)
 
     return {
