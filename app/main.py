@@ -18,8 +18,8 @@ class Wall(object):
 #danger value for the food
 class Food(object):
     def __init__(self):
-        self.baseDanger = -0.75
-        self.val = -0.75
+        self.baseDanger = -0.4
+        self.val = -0.4
 
     def __str__(self):
         return "F"
@@ -29,7 +29,8 @@ class Food(object):
 
 class Coin(object):
     def __init__(self):
-        self.baseDanger = -0.1
+        self.baseDanger = -0.5
+        self.val = -0.5
     def __str__(self):
         return "C"
 
@@ -70,8 +71,12 @@ class SnakePart(object):
         self.ishead = ishead
         if ishead:
             self.baseDanger = 3.0
+            if self.snake.id == Map.mysnakeid:
+                self.baseDanger = 0
         else:
             self.baseDanger = 1.0
+            if self.snake.id == Map.mysnakeid:
+                self.baseDanger = 0.5
 
     def __str__(self):
         headstr = ""
@@ -94,9 +99,27 @@ class Map(object):
     wall = Wall()
     #danger = Danger()
 
+def isLegalTile(tile):
+    return isinstance(tile, Danger) or isinstance(tile, Food)
+
 def getHead():
     snake = Map.snakes[Map.mysnakeid]
     return snake.coords[0]
+
+def getNearbyTiles(grid, points, cur, total):
+    if cur > total:
+        return
+    for point in filter(lambda p: p[2] == cur, points):
+        dd = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+        for d in filter(lambda x: point[1]+x[0] >= 0 and point[1]+x[0] < len(grid[0]) and point[0]+x[1] >= 0 and point[0]+x[1] < len(grid), dd):
+            tile = grid[point[1]+d[0]][point[0]+d[1]]
+            if not isLegalTile(tile):
+                continue
+            if not any(filter((lambda p: p[0] == point[0]+d[1] and p[1] == point[1]+d[0]), points)):
+                points.append((point[0]+d[1], point[1]+d[0], cur+1))
+                getNearbyTiles(grid, points, cur+1, total)
+
+
 
 def getDanger(x,y,grid):
     if y < 0 or y >= len(grid):
@@ -104,10 +127,15 @@ def getDanger(x,y,grid):
         return 1000000.0
     if x < 0 or x >= len(grid[y]):
         return 1000000.0
-
-    tile = grid[y][x]
-    if isinstance(tile, Danger) or isinstance(tile, Food):
-        return tile.val
+    tile =  grid[y][x]
+    if isLegalTile(tile):
+        danger = 0.0
+        nearby = [(x,y,1)]
+        getNearbyTiles(grid, nearby, 1, 5);
+        for t in nearby:
+            print "%d %d %d" % (t[0], t[1], t[2])
+            danger += grid[t[1]][t[0]].val * 2 * (0.2 ** t[2])
+        return (danger / len(nearby))
     else:
         return 1000000.0
 
@@ -146,7 +174,7 @@ def getMap(data):
     for y in range(len(grid)):
         for x in range(len(grid[y])):
             tile = grid[y][x]
-            if isinstance(tile, Danger) or isinstance(tile, Food):
+            if isLegalTile(tile):
                 for d in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
                     yy = d[0] + y
                     xx = d[1] + x
@@ -160,14 +188,14 @@ def getMap(data):
         for y in [0, len(grid) - 1 - hh]:
             for x in range(len(grid[y])):
                 tile = grid[y][x]
-                if isinstance(tile, Danger):
+                if isLegalTile(tile):
                     tile.val = addDanger(tile.val, (0.5 ** hh) * 0.4)
 
     for ww in range((width - 2) // 2):
         for y in range(len(grid)):
             for x in [0, len(grid[y]) - 1 - ww]:
                 tile = grid[y][x]
-                if isinstance(tile, Danger):
+                if isLegalTile(tile):
                     tile.val = addDanger(tile.val, (0.5 ** ww) * 0.4)
 
     return grid
