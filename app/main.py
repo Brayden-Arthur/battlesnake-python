@@ -7,7 +7,7 @@ currentTaunt = ''
 #Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
-        self.baseDanger = 0.2
+        self.baseDanger = 0.7
 
     def __str__(self):
         return "W"
@@ -29,8 +29,8 @@ class Food(object):
 
 class Coin(object):
     def __init__(self):
-        self.baseDanger = -0.5
-        self.val = -0.5
+        self.baseDanger = -0.9
+        self.val = -0.9
     def __str__(self):
         return "C"
 
