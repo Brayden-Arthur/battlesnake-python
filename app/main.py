@@ -7,7 +7,7 @@ currentTaunt = ''
 #Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
-        self.baseDanger = 0.2
+        self.baseDanger = 0.7
 
     def __str__(self):
         return "W"
@@ -29,8 +29,8 @@ class Food(object):
 
 class Coin(object):
     def __init__(self):
-        self.baseDanger = -0.5
-        self.val = -0.5
+        self.baseDanger = -0.9
+        self.val = -0.9
     def __str__(self):
         return "C"
 
@@ -165,7 +165,7 @@ def getMap(data):
         grid[wall[1]][wall[0]] = Map.wall
 
     for coin in data.get('gold', []):
-        grid[coin[1]][coin[0]] = Map.coin
+        grid[coin[1]][coin[0]] = Coin()
 
     for food in data.get('food', []):
         grid[food[1]][food[0]] = Food()
