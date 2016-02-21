@@ -203,7 +203,7 @@ def getTaunt():
     global currentTaunt
     if(tauntValue % 3 == 0):
         currentTaunt = random.choice(["\"eval(",
-                            "(Object object)",
+                            "[Object object]",
                             "42",
                             "); DROP TABLE SNAKES",
                             "420 blaze it",
