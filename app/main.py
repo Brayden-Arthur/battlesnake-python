@@ -100,7 +100,7 @@ class Map(object):
     #danger = Danger()
 
 def isLegalTile(tile):
-    return isinstance(tile, Danger) or isinstance(tile, Food)
+    return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getHead():
     snake = Map.snakes[Map.mysnakeid]
