@@ -210,7 +210,9 @@ def getTaunt():
                             "#yolo",
                             "potato",
                             "Casting Pyroblast - 5.0",
+                            "CLICK TO WIN FREE CRUISE!!!!!",
                             "no bombs now",
+                            "Find hot snakes in your area ;)",
                             "\\\\\\\\\\\\\\\\\\\\",
                             ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
     if(currentTaunt == 'Casting Pyroblast - 5.0'):
