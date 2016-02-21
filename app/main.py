@@ -2,8 +2,8 @@ import bottle
 import os
 import random
 
-global tauntValue = 0
-global currentTaunt = ''
+tauntValue = 0
+currentTaunt = ''
 #Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
@@ -201,6 +201,8 @@ def getMap(data):
     return grid
 
 def getTaunt():
+    global tauntValue
+    global currentTaunt
     if(tauntValue % 3 == 0):
         currentTaunt = random.choice(["\"eval(",
                             "UNDEFINED",
