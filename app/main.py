@@ -174,7 +174,7 @@ def getMap(data):
 
 def getTaunt():
     if(tauntValue % 3 == 0):
-        return currentTaunt = random.choice(["\"eval(",
+        currentTaunt = random.choice(["\"eval(",
                             "UNDEFINED",
                             "42",
                             ";DROPTABLE SNAKES",
@@ -185,8 +185,7 @@ def getTaunt():
                             "no bombs now",
                             "\\",
                             ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
-    else:
-        return currentTaunt
+    return currentTaunt
 
 @bottle.route('/static/<path:path>')
 def static(path):
