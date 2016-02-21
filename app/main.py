@@ -123,7 +123,6 @@ def getNearbyTiles(grid, points, cur, total):
 
 def getDanger(x,y,grid):
     if y < 0 or y >= len(grid):
-        print "invalid y"
         return 1000000.0
     if x < 0 or x >= len(grid[y]):
         return 1000000.0
@@ -133,7 +132,6 @@ def getDanger(x,y,grid):
         nearby = [(x,y,1)]
         getNearbyTiles(grid, nearby, 1, 5);
         for t in nearby:
-            print "%d %d %d" % (t[0], t[1], t[2])
             danger += grid[t[1]][t[0]].val * 2 * (0.2 ** t[2])
         return (danger / len(nearby))
     else:
@@ -287,8 +285,6 @@ def move():
         move = 'west'
 
     taunt = getTaunt()
-
-    print "%f %f %f %f %f" % (north, south, west, east, lowestDanger)
 
     return {
         'move': move,
