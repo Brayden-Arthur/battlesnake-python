@@ -211,14 +211,15 @@ def getTaunt():
                             "420 blaze it",
                             "#yolo",
                             "potato",
-                            "Casting Pyroblast - 5.0",
+                            "Casting Pyroblast",
                             "CLICK TO WIN FREE CRUISE!!!!!",
                             "no bombs now",
                             "Find hot snakes in your area ;)",
                             "\\\\\\\\\\\\\\\\\\\\",
                             ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
-    if(currentTaunt == 'Casting Pyroblast - 5.0'):
+    if(currentTaunt == 'Casting Pyroblast'):
         currentTaunt = 'Casting Pyroblast - 4.0'
+        tauntValue = tauntValue + 1
         return currentTaunt
     if(currentTaunt == 'Casting Pyroblast - 4.0'):
         currentTaunt = 'Casting Pyroblast - 3.0'
@@ -231,7 +232,7 @@ def getTaunt():
         return currentTaunt
     if(currentTaunt == 'Casting Pyroblast - 1.0'):
         currentTaunt = 'BOOOOOM!!!!!'
-        tauntValue = tauntValue + 1
+        tauntValue = tauntValue + 2
         return currentTaunt
     tauntValue = tauntValue + 1
     return currentTaunt
