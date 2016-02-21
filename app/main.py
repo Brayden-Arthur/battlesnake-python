@@ -29,7 +29,7 @@ class Food(object):
 
 class Coin(object):
     def __init__(self):
-        self.baseDanger = 0.1
+        self.baseDanger = -0.1
     def __str__(self):
         return "C"
 
@@ -177,14 +177,32 @@ def getTaunt():
         currentTaunt = random.choice(["\"eval(",
                             "UNDEFINED",
                             "42",
-                            ";DROPTABLE SNAKES",
+                            "); DROP TABLE SNAKES",
                             "420 blaze it",
                             "#yolo",
                             "potato",
-                            "Casting Pyroblast - 4.9s",
+                            "Casting Pyroblast - 5.0",
                             "no bombs now",
-                            "\\",
+                            "\\\\\\\\\\\\\\\\\\\\\",
                             ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
+    if(currentTaunt == 'Casting Pyroblast - 5.0'):
+        currentTaunt = 'Casting Pyroblast - 4.0'
+        return currentTaunt
+    if(currentTaunt == 'Casting Pyroblast - 4.0'):
+        currentTaunt = 'Casting Pyroblast - 3.0'
+        return currentTaunt
+    if(currentTaunt == 'Casting Pyroblast - 3.0'):
+        currentTaunt = 'Casting Pyroblast - 2.0'
+        return currentTaunt
+    if(currentTaunt == 'Casting Pyroblast - 2.0'):
+        currentTaunt = 'Casting Pyroblast - 1.0'
+        return currentTaunt
+    if(currentTaunt == 'Casting Pyroblast - 1.0'):
+        currentTaunt = 'BOOOOOM!!!!!'
+        tauntValue++
+        return currentTaunt
+
+    tauntValue++
     return currentTaunt
 
 @bottle.route('/static/<path:path>')
