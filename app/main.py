@@ -227,10 +227,10 @@ def getTaunt():
         return currentTaunt
     if(currentTaunt == 'Casting Pyroblast - 1.0'):
         currentTaunt = 'BOOOOOM!!!!!'
-        tauntValue++
+        tauntValue = tauntValue + 1
         return currentTaunt
 
-    tauntValue++
+    tauntValue = tauntValue + 1
     return currentTaunt
 
 @bottle.route('/static/<path:path>')
