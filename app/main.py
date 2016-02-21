@@ -201,6 +201,8 @@ def getMap(data):
     return grid
 
 def getTaunt():
+    global tauntValue
+    global currentTaunt
     if(tauntValue % 3 == 0):
         currentTaunt = random.choice(["\"eval(",
                             "UNDEFINED",
@@ -231,7 +233,6 @@ def getTaunt():
         currentTaunt = 'BOOOOOM!!!!!'
         tauntValue = tauntValue + 1
         return currentTaunt
-
     tauntValue = tauntValue + 1
     return currentTaunt
 
@@ -257,8 +258,6 @@ def index():
 def start():
     data = bottle.request.json
 
-    global tauntValue
-    global currentTaunt
     # TODO: Do things with data
 
     return {
