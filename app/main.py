@@ -274,11 +274,11 @@ def move():
             if(north < east):
                 move = 'up'
                 print('in north')
-    elif(south < west):
+    if(south < west):
         if(south < east):
             move = 'down'
             print('in south')
-    elif(west < east):
+    if(west < east):
         move = 'left'
         print('print west')
     else:
