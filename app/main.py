@@ -242,11 +242,6 @@ def static(path):
 
 @bottle.get('/')
 def index():
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
-
     return {
         'color': rgb(0, 255, 0),
         'head': "sand-worm"
