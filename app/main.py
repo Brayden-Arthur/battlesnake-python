@@ -257,9 +257,9 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    map = getMap(data)
+    head = []
+    map = getMap(data, head)
     move = 'north'
-    head = getHead(data)
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
