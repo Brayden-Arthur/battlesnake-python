@@ -147,7 +147,7 @@ class SnakePart(object):
 
 class Map(object):
     empty = ""
-    mysnakeid = "f99aee30-ec8b-4c28-b8c0-49df0e73080b"
+    mysnakeid = ""
     snakes = {}
     food = Food()
     coin = Coin()
@@ -220,11 +220,9 @@ def getMap(data):
     for wall in data.get('walls', []):
         grid[wall[1]][wall[0]] = Map.wall
 
-    for coin in data.get('gold', []):
-        grid[coin[1]][coin[0]] = Coin()
-
     for food in data.get('food', []):
         grid[food[1]][food[0]] = Food()
+        grid[food[1]][food[0]].val() = (grid[food[1]][food[0]].val() * 100) / Map.snakes[data['you']].health_points
 
 
     for y in range(len(grid)):
@@ -279,9 +277,7 @@ def move():
     print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
-    Food.val = Food.val - 0.2
-    if(Map.snakes[data['you']].health_points > 99):
-        Food.val = -0.2
+
     map = getMap(data)
     print(head)
     move = 'up'
