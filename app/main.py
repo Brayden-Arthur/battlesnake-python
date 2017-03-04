@@ -270,31 +270,13 @@ def move():
     print('values of  NESW = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
 
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
-    d = min(direction, key=lambda x: x[0])[1]
-    print(d)
-    '''direction_dict = dict('up': north, 'down': south, 'left': west, 'right': right)
-    direction=""
-    direction = min(direction_dict, direction=direction_dict.get)
-    if(north < south):
-        if(north < west):
-            if(north < east):
-                move = 'up'
-                print('in north')
-    if(south < west):
-        if(south < east):
-            move = 'down'
-            print('in south')
-    if(west < east):
-        move = 'left'
-        print('print west')
-    if():
-        move = 'right'
-        print('in east')
-'''
+    move = min(direction, key=lambda x: x[0])[1]
+    print(move)
+
     taunt = getTaunt()
     print('end of move block##############')
     return {
-        'move': d,
+        'move': move,
         'taunt': taunt
     }
 
