@@ -103,7 +103,7 @@ def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getHead(data):
-    snake = data['snakes'][0]
+    snake = Map.snakes[Map.mysnakeid]
     return snake.coords[0]
 
 def getNearbyTiles(grid, points, cur, total):
@@ -141,14 +141,17 @@ def addDanger(d1, d2):
     return d1 + d2
 
 
-def getMap(data):
+def getMap(data, head):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
     width = data['width']
     height = data['height']
+    snek = data['you']
     for snake in data['snakes']:
         snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
+        if(snake['id'] = snek):
+            head = snake['coords'][0]
         for coord in snake['coords']:
             snakepart = None
             if hasBeenHead:
