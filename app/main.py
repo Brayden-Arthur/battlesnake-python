@@ -257,6 +257,7 @@ def start():
 
 @bottle.post('/move')
 def move():
+    print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
     map = getMap(data)
@@ -286,7 +287,7 @@ def move():
 
     print(move)
     taunt = getTaunt()
-
+    print('end of move block##############')
     return {
         'move': move,
         'taunt': taunt
