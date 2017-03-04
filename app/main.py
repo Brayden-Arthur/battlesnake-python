@@ -107,9 +107,7 @@ def getHead(data):
     head = []
     for snake in data['snakes']:
         if(str(snake['id']) == str(snek)):
-            print('coords is ' +str(snake['coords'][0]) + ' or maybe this ' + str(snake['coords'][1]))
             head = snake['coords'][0]
-
     return head
 
 def getNearbyTiles(grid, points, cur, total):
@@ -262,12 +260,13 @@ def move():
     data = bottle.request.json
     head = getHead(data)
     map = getMap(data)
+    print(head)
     move = 'north'
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
-
+    print('values of  NEWS = ' + north + ' ' + south + ' ' +  east + ' ' +  west )
     lowestDanger = min(north,south,east,west)
     if(lowestDanger == north):
         move = 'north'
