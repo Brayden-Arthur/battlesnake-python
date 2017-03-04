@@ -108,7 +108,7 @@ class Danger(object):
 
 
 class Snake(object):
-    def __init__(self, id, name, coords):
+    def __init__(self, id, name, coords, health_points):
         self.id = id
         self.name = name
         self.head = SnakePart(self, True)
