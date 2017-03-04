@@ -269,6 +269,12 @@ def move():
     south = getDanger(head[0],head[1] + 1 , map)
     print('values of  NESW = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
 
+    direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
+    d = min(direction, key=lambda x: x[0])[1]
+    print(d)
+    '''direction_dict = dict('up': north, 'down': south, 'left': west, 'right': right)
+    direction=""
+    direction = min(direction_dict, direction=direction_dict.get)
     if(north < south):
         if(north < west):
             if(north < east):
@@ -281,15 +287,14 @@ def move():
     if(west < east):
         move = 'left'
         print('print west')
-    if:
+    if():
         move = 'right'
         print('in east')
-
-    print(move)
+'''
     taunt = getTaunt()
     print('end of move block##############')
     return {
-        'move': move,
+        'move': d,
         'taunt': taunt
     }
 
