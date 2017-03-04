@@ -103,7 +103,7 @@ def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getHead(data):
-    snake = data['snakes'].id[data['you']]
+    snake = data['snakes'][0]
     return snake.coords[0]
 
 def getNearbyTiles(grid, points, cur, total):
