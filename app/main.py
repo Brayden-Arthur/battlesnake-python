@@ -242,25 +242,27 @@ def static(path):
 
 @bottle.get('/')
 def index():
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
+
 
     return {
         'color': '#00ff00',
-        'head': head_url
     }
 
 
 @bottle.post('/start')
 def start():
     data = bottle.request.json
-
+    head_url = '%s://%s/static/head.png' % (
+        bottle.request.urlparts.scheme,
+        bottle.request.urlparts.netloc
+    )
     # TODO: Do things with data
 
     return {
-        'taunt': 'INFERNAL DINOSAUR'
+        'color': 'green',
+        'name': 'KING DODONGO'
+        'taunt': 'INFERNAL DINOSAUR',
+        'head_url': head_url
     }
 
 @bottle.post('/move')
