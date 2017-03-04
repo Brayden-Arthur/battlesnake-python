@@ -266,7 +266,7 @@ def move():
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
-    print('values of  NEWS = ' + north + ' ' + south + ' ' +  east + ' ' +  west )
+    print('values of  NEWS = ' + str(north) + ' ' + str(south) + ' ' +  str(east) + ' ' +  str(west))
     lowestDanger = min(north,south,east,west)
     if(lowestDanger == north):
         move = 'north'
