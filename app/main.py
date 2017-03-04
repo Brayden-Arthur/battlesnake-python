@@ -153,7 +153,7 @@ def getMap(data, head):
         print("SNAKE COORDS = " + str(snake['coords']))
         print("snake id = " + snake['id'] + " and snek is = " + snek)
         if(str(snake['id']) == str(snek)):
-            print('coords is ' + snake['coords'][0] + ' or maybe this ' + snake['coords'][1])
+            print('coords is ' +str(snake['coords'][0]) + ' or maybe this ' + str(snake['coords'][1]))
             head = snake['coords'][0]
         for coord in snake['coords']:
             snakepart = None
