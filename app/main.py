@@ -24,7 +24,7 @@ pyro = ["Casting Pyroblast",
         'Casting Pyroblast - 1.0',
         'BOOOOOM!!!!!']
 
-ticker = ["bootlesnoooooook"]
+ticker = "bootlesnoooooook"
 
 def tauntPyro():
 	tr = tauntSeq(pyro)
@@ -292,7 +292,6 @@ def move():
     print(move)
 
     taunt = tt.next()
-    print(taunt)
     print('end of move block##############')
     return {
         'move': move,
