@@ -102,8 +102,8 @@ class Map(object):
 def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
-def getHead():
-    snake = Map.snakes[Map.mysnakeid]
+def getHead(data):
+    snake = data['you']
     return snake.coords[0]
 
 def getNearbyTiles(grid, points, cur, total):
@@ -255,9 +255,8 @@ def start():
 def move():
     data = bottle.request.json
     map = getMap(data)
-    map.mysnakeid = data['you']
     move = 'north'
-    head = getHead()
+    head = getHead(data)
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
@@ -302,36 +301,3 @@ def end():
 application = bottle.default_app()
 if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
-    #print getmap({
-    #    'height': 4,
-    #    'width': 4,
-    #    'snakes': [
-    #        {
-    #            'id': Map.mysnakeid,
-    #            'name': 'Snake name',
-    #            'status': 'alive',
-    #            'coords': [
-    #                [1, 1], [1, 2]
-    #            ]
-    #        },
-    #        {
-    #            'id': 'lol',
-    #            'name': 'lol snake',
-    #            'status': 'alive',
-    #            'coords': [
-    #                [2,1], [3, 1]
-    #            ]
-    #        }
-    #    ],
-    #    'walls' : [
-    #        [2,2],
-    #        [2,3]
-    #    ],
-    #    'food': [
-    #        [0,0]
-    #    ],
-    #    'gold': [
-    #        [1,0]
-    #    ]
-    #})
-    #print getHead()
