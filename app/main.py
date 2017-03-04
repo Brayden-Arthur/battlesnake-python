@@ -255,7 +255,7 @@ def start():
     # TODO: Do things with data
     return {
         'color': 'green',
-        'name': 'KING DODONGO'
+        'name': 'KING DODONGO',
         'taunt': 'INFERNAL DINOSAUR',
         'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
     }
