@@ -292,7 +292,7 @@ def move():
     print(move)
 
     taunt = tt.next()
-    print('taunt is = ' + taunt)
+    print(taunt)
     print('end of move block##############')
     return {
         'move': move,
