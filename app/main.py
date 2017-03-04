@@ -223,7 +223,6 @@ def getMap(data):
     for food in data.get('food', []):
         grid[food[1]][food[0]] = Food()
         grid[food[1]][food[0]].val = (grid[food[1]][food[0]].val * 500) / (Map.snakes[data['you']].health_points)
-        print('food value is = ' + str(grid[food[1]][food[0]].val))
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
@@ -274,25 +273,20 @@ def start():
 
 @bottle.post('/move')
 def move():
-    print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
 
     map = getMap(data)
-    print(head)
     move = 'up'
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
-    print('values of  NESW = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
 
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move = min(direction, key=lambda x: x[0])[1]
-    print(move)
 
     taunt = tt.next()
-    print('end of move block##############')
     return {
         'move': move,
         'taunt': taunt
