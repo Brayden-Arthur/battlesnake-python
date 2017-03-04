@@ -267,15 +267,18 @@ def move():
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
     print('values of  NEWS = ' + str(north) + ' ' + str(south) + ' ' +  str(east) + ' ' +  str(west))
-    lowestDanger = min(north,south,east,west)
-    if(lowestDanger == north):
-        move = 'north'
-    elif(lowestDanger == south):
-        move = 'south'
-    elif(lowestDanger == east):
-        move = 'east'
-    if(lowestDanger == west):
+
+    if(north < south):
+        if(north < west):
+            if(north < east):
+                move = 'north'
+    elif(south < west):
+        if(south < east):
+            move = 'south'
+    elif(west < east):
         move = 'west'
+    else:
+        move = 'east'
 
     taunt = getTaunt()
 
