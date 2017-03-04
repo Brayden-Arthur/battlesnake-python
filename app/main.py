@@ -24,7 +24,7 @@ pyro = ["Casting Pyroblast",
         'Casting Pyroblast - 1.0',
         'BOOOOOM!!!!!']
 
-ticker = "bootlesnoooooook"
+ticker = "bootlesnook"
 
 def tauntPyro():
 	tr = tauntSeq(pyro)
@@ -72,8 +72,8 @@ class Wall(object):
 #danger value for the food
 class Food(object):
     def __init__(self):
-        self.baseDanger = -0.4
-        self.val = -0.4
+        self.baseDanger = -0.9
+        self.val = -0.9
 
     def __str__(self):
         return "F"
