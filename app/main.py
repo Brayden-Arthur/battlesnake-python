@@ -242,9 +242,14 @@ def static(path):
 
 @bottle.get('/')
 def index():
+    data = bottle.request.json
 
+    # TODO: Do things with data
     return {
-        'color': '#00ff00'
+        'color': 'green',
+        'name': 'KING DODONGO',
+        'taunt': 'INFERNAL DINOSAUR',
+        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
     }
 
 
