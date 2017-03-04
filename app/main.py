@@ -103,8 +103,14 @@ def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getHead(data):
-    snake = Map.snakes[Map.mysnakeid]
-    return snake.coords[0]
+    snek = data['you']
+    head = []
+    for snake in data['snakes']:
+        if(str(snake['id']) == str(snek)):
+            print('coords is ' +str(snake['coords'][0]) + ' or maybe this ' + str(snake['coords'][1]))
+            head = snake['coords'][0]
+
+    return head
 
 def getNearbyTiles(grid, points, cur, total):
     if cur > total:
@@ -141,20 +147,14 @@ def addDanger(d1, d2):
     return d1 + d2
 
 
-def getMap(data, head):
+def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
     width = data['width']
     height = data['height']
-    snek = data['you']
     for snake in data['snakes']:
         snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
-        print("SNAKE COORDS = " + str(snake['coords']))
-        print("snake id = " + snake['id'] + " and snek is = " + snek)
-        if(str(snake['id']) == str(snek)):
-            print('coords is ' +str(snake['coords'][0]) + ' or maybe this ' + str(snake['coords'][1]))
-            head = snake['coords'][0]
         for coord in snake['coords']:
             snakepart = None
             if hasBeenHead:
@@ -260,9 +260,8 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    head = []
-    map = getMap(data, head)
-    print(head)
+    head = getHead(data)
+    map = getMap(data)
     move = 'north'
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
