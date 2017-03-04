@@ -268,7 +268,10 @@ def start():
         'color': 'green',
         'name': 'KING DODONGO',
         'taunt': 'INFERNAL DINOSAUR',
-        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
+        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png',
+        'tail_type': "block-bum",
+        'head_type': "smile",
+        'secondary-colour': 'yellow'
     }
 
 @bottle.post('/move')
