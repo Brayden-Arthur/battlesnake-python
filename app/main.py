@@ -15,7 +15,15 @@ taunts = ["\"eval(",
             "no bombs now",
             "Find hot snakes in your area ;)",
             "My Anaconda Don't",
-            ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"]
+            ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:",
+            "harambe died for nothing",
+            "I want Trump for food",
+            ".",
+            "( ͡° ͜ʖ ͡°)",
+            "¯\_(ツ)_/¯",
+            "̿̿ ̿̿ ̿̿ ̿'̿'\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿",
+            "(ง ͠° ͟ل͜ ͡°)ง"
+            ]
 
 pyro = ["Casting Pyroblast",
         'Casting Pyroblast - 4.0',
