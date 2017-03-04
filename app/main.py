@@ -145,7 +145,6 @@ def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
     width = data['width']
     height = data['height']
-    grid.mysnakeid = data['you']
     for snake in data['snakes']:
         snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
         Map.snakes[snake['id']] = snakeobj
@@ -256,6 +255,7 @@ def start():
 def move():
     data = bottle.request.json
     map = getMap(data)
+    map.mysnakeid = data['you']
     move = 'north'
     head = getHead()
     west = getDanger(head[0] - 1,head[1], map)
