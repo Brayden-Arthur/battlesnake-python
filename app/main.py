@@ -156,9 +156,13 @@ class Map(object):
 def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
-def getHead():
-    snake = Map.snakes[Map.mysnakeid]
-    return snake.coords[0]
+def getHead(data):
+    snek = data['you']
+    head = []
+    for snake in data['snakes']:
+        if(str(snake['id']) == str(snek)):
+            head = snake['coords'][0]
+    return head
 
 def getNearbyTiles(grid, points, cur, total):
     if cur > total:
@@ -199,7 +203,6 @@ def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
     width = data['width']
     height = data['height']
-
     for snake in data['snakes']:
         snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
         Map.snakes[snake['id']] = snakeobj
@@ -258,45 +261,45 @@ def static(path):
     return bottle.static_file(path, root='static/')
 
 
-@bottle.get('/')
-def index():
-    return {
-        'color': rgb(0, 255, 0),
-        'head': "sand-worm"
-    }
-
-
 @bottle.post('/start')
 def start():
     data = bottle.request.json
 
     # TODO: Do things with data
-
     return {
-        'taunt': 'INFERNAL DINOSAUR'
+        'color': 'green',
+        'name': 'KING DODONGO',
+        'taunt': 'INFERNAL DINOSAUR',
+        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
     }
 
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    head = getHead(data)
     map = getMap(data)
-    move = 'north'
-    head = getHead()
+    print(head)
+    move = 'up'
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
 
-    lowestDanger = min(north,south,east,west)
-    if(lowestDanger == north):
-        move = 'north'
-    elif(lowestDanger == south):
-        move = 'south'
-    elif(lowestDanger == east):
-        move = 'east'
-    if(lowestDanger == west):
-        move = 'west'
-
+    print('values of  NEWS = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
+    [(north, "up")]
+    if(north < south):
+        if(north < west):
+            if(north < east):
+                move = 'up'
+    elif(south < west):
+        if(south < east):
+            move = 'down'
+    elif(west < east):
+        move = 'left'
+    else:
+        move = 'right'
+        
+    print(move)
     taunt = tt.next()
 
     return {
@@ -326,36 +329,3 @@ def end():
 application = bottle.default_app()
 if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
-    #print getmap({
-    #    'height': 4,
-    #    'width': 4,
-    #    'snakes': [
-    #        {
-    #            'id': Map.mysnakeid,
-    #            'name': 'Snake name',
-    #            'status': 'alive',
-    #            'coords': [
-    #                [1, 1], [1, 2]
-    #            ]
-    #        },
-    #        {
-    #            'id': 'lol',
-    #            'name': 'lol snake',
-    #            'status': 'alive',
-    #            'coords': [
-    #                [2,1], [3, 1]
-    #            ]
-    #        }
-    #    ],
-    #    'walls' : [
-    #        [2,2],
-    #        [2,3]
-    #    ],
-    #    'food': [
-    #        [0,0]
-    #    ],
-    #    'gold': [
-    #        [1,0]
-    #    ]
-    #})
-    #print getHead()
