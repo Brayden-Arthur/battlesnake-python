@@ -275,6 +275,7 @@ def start():
 
 @bottle.post('/move')
 def move():
+    print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
     map = getMap(data)
@@ -284,24 +285,14 @@ def move():
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
+    print('values of  NESW = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
 
-    print('values of  NEWS = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
-    [(north, "up")]
-    if(north < south):
-        if(north < west):
-            if(north < east):
-                move = 'up'
-    elif(south < west):
-        if(south < east):
-            move = 'down'
-    elif(west < east):
-        move = 'left'
-    else:
-        move = 'right'
-        
+    direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
+    move = min(direction, key=lambda x: x[0])[1]
     print(move)
-    taunt = tt.next()
 
+    taunt = tt.next()
+    print('end of move block##############')
     return {
         'move': move,
         'taunt': taunt
