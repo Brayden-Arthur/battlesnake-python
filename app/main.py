@@ -72,8 +72,8 @@ class Wall(object):
 #danger value for the food
 class Food(object):
     def __init__(self):
-        self.baseDanger = -0.9
-        self.val = -0.9
+        self.baseDanger = -0.4
+        self.val = -0.4
 
     def __str__(self):
         return "F"
@@ -113,6 +113,7 @@ class Snake(object):
         self.name = name
         self.head = SnakePart(self, True)
         self.body = SnakePart(self, False)
+        self.health_points = health_points
         self.coords = coords
     def __str__(self):
         return self.name
@@ -204,7 +205,7 @@ def getMap(data):
     width = data['width']
     height = data['height']
     for snake in data['snakes']:
-        snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
+        snakeobj =  Snake(snake['id'], snake['name'], snake['coords'], snake['health_points'])
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
         for coord in snake['coords']:
@@ -278,6 +279,9 @@ def move():
     print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
+    Food.val = Food.val - 0.2
+    if(Map.snakes[snake[data['you']].health_points > 99):
+        Food.val = -0.2
     map = getMap(data)
     print(head)
     move = 'up'
