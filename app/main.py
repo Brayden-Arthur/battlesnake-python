@@ -150,6 +150,7 @@ def getMap(data, head):
         snakeobj =  Snake(snake['id'], snake['name'], snake['coords'])
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
+        print("SNAKE COORDS = " + snake['coords'])
         if(snake['id'] == snek):
             head = snake['coords'][0]
         for coord in snake['coords']:
@@ -259,6 +260,7 @@ def move():
     data = bottle.request.json
     head = []
     map = getMap(data, head)
+    print(head)
     move = 'north'
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
