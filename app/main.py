@@ -248,8 +248,8 @@ def index():
     )
 
     return {
-        'color': '#00ff00',
-        'head': head_url
+        'color': rgb(0, 255, 0),
+        'head': "sand-worm"
     }
 
 
