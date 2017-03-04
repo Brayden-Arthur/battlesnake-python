@@ -266,7 +266,7 @@ def move():
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
-    print('values of  NEWS = ' + str(north) + ' ' + str(south) + ' ' +  str(east) + ' ' +  str(west))
+    print('values of  NEWS = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
 
     if(north < south):
         if(north < west):
@@ -279,6 +279,7 @@ def move():
         move = 'left'
     else:
         move = 'right'
+        
     print(move)
     taunt = getTaunt()
 
