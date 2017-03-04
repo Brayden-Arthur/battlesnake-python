@@ -103,7 +103,7 @@ def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getHead():
-    snake = Map.snakes[Map.mysnakeid]
+    snake = Map.snakes[Map.you]
     return snake.coords[0]
 
 def getNearbyTiles(grid, points, cur, total):
@@ -255,6 +255,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    print(data)
     map = getMap(data)
     move = 'north'
     head = getHead()
