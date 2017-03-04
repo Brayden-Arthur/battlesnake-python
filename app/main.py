@@ -252,17 +252,13 @@ def index():
 @bottle.post('/start')
 def start():
     data = bottle.request.json
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
-    # TODO: Do things with data
 
+    # TODO: Do things with data
     return {
         'color': 'green',
         'name': 'KING DODONGO'
         'taunt': 'INFERNAL DINOSAUR',
-        'head_url': head_url
+        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
     }
 
 @bottle.post('/move')
