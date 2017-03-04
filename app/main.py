@@ -272,14 +272,18 @@ def move():
         if(north < west):
             if(north < east):
                 move = 'up'
+                print('in north')
     elif(south < west):
         if(south < east):
             move = 'down'
+            print('in south')
     elif(west < east):
         move = 'left'
+        print('print west')
     else:
         move = 'right'
-        
+        print('in east')
+
     print(move)
     taunt = getTaunt()
 
