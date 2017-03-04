@@ -240,19 +240,6 @@ def static(path):
     return bottle.static_file(path, root='static/')
 
 
-@bottle.get('/')
-def index():
-    data = bottle.request.json
-
-    # TODO: Do things with data
-    return {
-        'color': 'green',
-        'name': 'KING DODONGO',
-        'taunt': 'INFERNAL DINOSAUR',
-        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
-    }
-
-
 @bottle.post('/start')
 def start():
     data = bottle.request.json
