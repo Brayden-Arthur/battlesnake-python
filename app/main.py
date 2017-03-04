@@ -2,8 +2,62 @@ import bottle
 import os
 import random
 
-tauntValue = 0
-currentTaunt = ''
+taunts = ["\"eval(",
+            "[Object object]",
+            "42",
+            "); DROP TABLE SNAKES",
+            "420 blaze it",
+            "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
+            "#yolo",
+            "potato",
+            "Casting Pyroblast",
+            "CLICK TO WIN FREE CRUISE!!!!!",
+            "no bombs now",
+            "Find hot snakes in your area ;)",
+            "My Anaconda Don't",
+            ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"]
+
+pyro = ["Casting Pyroblast",
+        'Casting Pyroblast - 4.0',
+        'Casting Pyroblast - 3.0',
+        'Casting Pyroblast - 2.0',
+        'Casting Pyroblast - 1.0',
+        'BOOOOOM!!!!!']
+
+ticker = ["bootlesnoooooook"]
+
+def tauntPyro():
+	tr = tauntSeq(pyro)
+	while True:
+		yield tr.next()
+
+def tauntSeq(taunts):
+	i = 0
+	while True:
+		yield taunts[i]
+		i = i + 1
+		if i >= len(taunts):
+			i = 0
+
+def tauntTicker(str):
+	 i = 0
+	 j = len(str)
+	 while True:
+		yield str[i:j if j > i else len(str)] + str[0:j+1 if i > j else 0]
+		i = i + 1
+		j = j + 1
+		if i > len(str):
+			i = 0
+		if j > len(str):
+			j = 0
+
+tp = tauntPyro()
+ts = tauntSeq(taunts)
+tt = tauntTicker(ticker)
+
+#call with tt.next()
+
+
 #Gettting the danger value for danger. Change value when needed
 class Wall(object):
     def __init__(self):
@@ -198,42 +252,6 @@ def getMap(data):
 
     return grid
 
-def getTaunt():
-    global tauntValue
-    global currentTaunt
-    if(tauntValue % 3 == 0):
-        currentTaunt = random.choice(["\"eval(",
-                            "[Object object]",
-                            "42",
-                            "); DROP TABLE SNAKES",
-                            "420 blaze it",
-                            "#yolo",
-                            "potato",
-                            "Casting Pyroblast",
-                            "CLICK TO WIN FREE CRUISE!!!!!",
-                            "no bombs now",
-                            "Find hot snakes in your area ;)",
-                            "My Anaconda Don't",
-                            ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"])
-    if(currentTaunt == 'Casting Pyroblast'):
-        currentTaunt = 'Casting Pyroblast - 4.0'
-        tauntValue = tauntValue + 1
-        return currentTaunt
-    if(currentTaunt == 'Casting Pyroblast - 4.0'):
-        currentTaunt = 'Casting Pyroblast - 3.0'
-        return currentTaunt
-    if(currentTaunt == 'Casting Pyroblast - 3.0'):
-        currentTaunt = 'Casting Pyroblast - 2.0'
-        return currentTaunt
-    if(currentTaunt == 'Casting Pyroblast - 2.0'):
-        currentTaunt = 'Casting Pyroblast - 1.0'
-        return currentTaunt
-    if(currentTaunt == 'Casting Pyroblast - 1.0'):
-        currentTaunt = 'BOOOOOM!!!!!'
-        tauntValue = tauntValue + 2
-        return currentTaunt
-    tauntValue = tauntValue + 1
-    return currentTaunt
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -279,7 +297,7 @@ def move():
     if(lowestDanger == west):
         move = 'west'
 
-    taunt = getTaunt()
+    taunt = tt.next()
 
     return {
         'move': move,
