@@ -280,7 +280,7 @@ def move():
     data = bottle.request.json
     head = getHead(data)
     Food.val = Food.val - 0.2
-    if(Map.snakes[snake[data['you']].health_points > 99):
+    if(Map.snakes[data['you']].health_points > 99):
         Food.val = -0.2
     map = getMap(data)
     print(head)
