@@ -243,9 +243,8 @@ def static(path):
 @bottle.get('/')
 def index():
 
-
     return {
-        'color': '#00ff00',
+        'color': '#00ff00'
     }
 
 
