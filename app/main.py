@@ -151,7 +151,7 @@ def getMap(data, head):
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
         print("SNAKE COORDS = " + str(snake['coords']))
-        print("snake id = " + snake['id'] " and snek is = " + snek)
+        print("snake id = " + snake['id'] + " and snek is = " + snek)
         if(snake['id'] == snek):
             head = snake['coords'][0]
         for coord in snake['coords']:
