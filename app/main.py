@@ -261,7 +261,7 @@ def move():
     head = getHead(data)
     map = getMap(data)
     print(head)
-    move = 'north'
+    move = 'up'
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
@@ -271,15 +271,15 @@ def move():
     if(north < south):
         if(north < west):
             if(north < east):
-                move = 'north'
+                move = 'up'
     elif(south < west):
         if(south < east):
-            move = 'south'
+            move = 'down'
     elif(west < east):
-        move = 'west'
+        move = 'left'
     else:
-        move = 'east'
-
+        move = 'right'
+    print(move)
     taunt = getTaunt()
 
     return {
