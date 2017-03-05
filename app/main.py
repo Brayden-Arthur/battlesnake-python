@@ -128,7 +128,7 @@ class SnakePart(object):
         self.snake = snake
         self.ishead = ishead
         if ishead:
-            self.baseDanger = 3.0
+            self.baseDanger = 5.0
             if self.snake.id == Map.mysnakeid:
                 self.baseDanger = 0
         else:
@@ -274,6 +274,7 @@ def start():
         'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png',
         'tail_type': "block-bum",
         'head_type': "smile",
+        'secondary-colour': 'yellow'
     }
 
 @bottle.post('/move')
