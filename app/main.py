@@ -293,7 +293,7 @@ def move():
     move_dict['move'] = min(direction, key=lambda x: x[0])[1]
 
     move_dict['taunt'] = ts.next()
-    if(data.turn == 500):
+    if(data['turn'] == 500):
         move_dict['color'] = 'green'
     return {
 
