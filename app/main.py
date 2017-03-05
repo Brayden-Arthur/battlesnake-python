@@ -297,7 +297,7 @@ def move():
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move = min(direction, key=lambda x: x[0])[1]
 
-    taunt = tt.next()
+    taunt = ts.next()
     return {
         'move': move,
         'taunt': taunt
