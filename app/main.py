@@ -192,7 +192,7 @@ def getDanger(x,y,grid):
     if isLegalTile(tile):
         danger = 0.0
         nearby = [(x,y,1)]
-        getNearbyTiles(grid, nearby, 1, 20);
+        getNearbyTiles(grid, nearby, 1, 10);
         for t in nearby:
             danger += grid[t[1]][t[0]].val * 2 * (0.2 ** t[2])
         return (danger / len(nearby))
@@ -268,13 +268,12 @@ def start():
 
     # TODO: Do things with data
     return {
-        'color': 'green',
+        'color': "#807d8b",
         'name': 'KING DODONGO',
         'taunt': 'INFERNAL DINOSAUR',
         'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png',
         'tail_type': "block-bum",
         'head_type': "smile",
-        'secondary-colour': 'yellow'
     }
 
 @bottle.post('/move')
