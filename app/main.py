@@ -295,11 +295,7 @@ def move():
     move_dict['taunt'] = ts.next()
     if(data['turn'] == 500):
         move_dict['color'] = 'green'
-    return {
-
-        'move': move,
-        'taunt': taunt
-    }
+    return move_dict
 
 
 
