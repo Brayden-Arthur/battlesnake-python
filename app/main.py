@@ -192,7 +192,7 @@ def getDanger(x,y,grid):
     if isLegalTile(tile):
         danger = 0.0
         nearby = [(x,y,1)]
-        getNearbyTiles(grid, nearby, 1, 10);
+        getNearbyTiles(grid, nearby, 1, 20);
         for t in nearby:
             danger += grid[t[1]][t[0]].val * 2 * (0.2 ** t[2])
         return (danger / len(nearby))
