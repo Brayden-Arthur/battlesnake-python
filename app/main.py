@@ -1,6 +1,24 @@
 import bottle
 import os
 import random
+import heapq
+
+import signal
+from contextlib import contextmanager
+
+class TimeoutException(Exception):
+    pass
+
+@contextmanager
+def time_limit(seconds):
+    def signal_handler(signum, frame):
+        raise TimeoutException, "Timed out!"
+    signal.signal(signal.SIGALRM, signal_handler)
+    signal.alarm(seconds)
+    try:
+        yield
+    finally:
+        signal.alarm(0)
 
 taunts = ["\"eval(",
             "[Object object]",
@@ -156,6 +174,13 @@ class Map(object):
 
 def isLegalTile(tile):
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
+    
+def getSnake(data):
+    snek = data['you']
+    for snake in data['snakes']:
+        if(str(snake['id']) == str(snek)):
+            return snake
+    return None
 
 def getHead(data):
     snek = data['you']
@@ -198,6 +223,58 @@ def getDanger(x,y,grid):
 
 def addDanger(d1, d2):
     return d1 + d2
+    
+def inbounds(x, y, map):
+    if (y < 0):
+        return False
+    if (y >= len(map)):
+        return False
+    if (x < 0):
+        return False
+    if (x >= len(map[0])):
+        return False
+    return True
+    
+    
+def dist(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])    
+
+def dfs(start, end, map):
+    visited = {}
+    heap = [(20, start, None)] #lookatposition, myLoc, parent
+    iter = 0
+    
+    while (len(heap) > 0):
+        nextData = heapq.heappop(heap)
+        nextPoint = nextData[1]
+        
+        iter += 1
+        if (iter >= 3000):
+            return None
+        
+        for dd in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
+            pp = [dd[0] + nextPoint[0], dd[1] + nextPoint[1]]
+
+            if (pp[0] == end[0] and pp[1] == end[1]):
+                return (0, pp, nextData)
+            
+            if (not inbounds(pp[0], pp[1], map)):
+                continue
+            if (not isLegalTile(map[pp[1]][pp[0]])):
+                continue
+        
+            addedTuple = (dist(pp, end), pp, nextData)
+            #print("Adding point {} {} - value {}".format(addedTuple[1][0], addedTuple[1][1], addedTuple[0]))
+            cost = visited.get(nextPoint[0] + nextPoint[1] * 1j, 0) + 1
+            if (visited.get(pp[0] + pp[1] * 1j, 100000000) < cost):
+                continue
+            visited[pp[0] + pp[1] * 1j] = cost
+            heapq.heappush(heap, addedTuple)
+    
+    return None
+            
+    
+    
 
 
 def getMap(data):
@@ -272,20 +349,67 @@ def start():
         'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
     }
 
-@bottle.post('/move')
-def move():
+def emergencyFoodCalc(data, head, snake, map):
+    move = None
+    if (snake['health_points'] < 95):
+        print("Need food now!")
+        food = data.get('food', [])
+        pathing_point = [0,0]
+        if (len(food) > 0):
+            pathing_point = min(food, key = lambda foodPoint: dist(head, foodPoint))
+        else:
+            pathing_point = [data['width'] // 2, data['height'] // 2]
+        
+        moveinfo = dfs(head, pathing_point, map)
+        
+        if (moveinfo == None or moveinfo[2] == None):
+            print("No path to food found")
+            return None
+            
+        while(moveinfo[2] != None and  moveinfo[2][2] != None):
+            moveinfo = moveinfo[2]
+            #print(moveinfo)
+        
+        pp = moveinfo[1]
+        if (pp[0] == head[0] + 1 and pp[1] == head[1]):
+            move = 'right'
+        elif (pp[0] == head[0] - 1 and pp[1] == head[1]):
+            move = 'left'
+        elif (pp[0] == head[0] and pp[1] == head[1] - 1):
+            move = 'up'
+        elif (pp[0] == head[0] and pp[1] == head[1] + 1):
+            move = 'down'
+        else:
+            print("WOAH!!!!! THIS IS A BUG")
+            print("head {} {}".format(head[0], head[1]))
+            move = 'down'
+    return move
+
+def calc():
     print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
+    snake = getSnake(data)
 
     map = getMap(data)
     print(head)
     move = 'up'
+    
+    foodmove = emergencyFoodCalc(data, head, snake, map)
+    if (foodmove != None):
+        print("Emergency food move {}".format(foodmove))
+        return {
+            'move': foodmove,
+            'taunt': 'I NEED FOOD'
+        }
+        
+        
     west = getDanger(head[0] - 1,head[1], map)
     east = getDanger(head[0] + 1,head[1], map)
     north = getDanger(head[0],head[1] - 1 , map)
     south = getDanger(head[0],head[1] + 1 , map)
-    print('values of  NESW = ' + str(north) + ' ' + str(east) + ' ' +  str(south) + ' ' +  str(west))
+    
+    
 
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move = min(direction, key=lambda x: x[0])[1]
@@ -298,6 +422,11 @@ def move():
         'taunt': taunt
     }
 
+@bottle.post('/move')
+def move():
+    with time_limit(1):
+        return calc()
+    
 
 
 #protect the coins,
