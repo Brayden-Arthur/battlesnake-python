@@ -268,10 +268,10 @@ def start():
 
     # TODO: Do things with data
     return {
-        'color': "#807d8b",
+        'color': "green",
         'name': 'KING DODONGO',
         'taunt': 'INFERNAL DINOSAUR',
-        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png',
+        'head_url': 'https://media.giphy.com/media/SA9s1XbFctROo/giphy.gif',
         'tail_type': "block-bum",
         'head_type': "smile",
         'secondary-colour': 'yellow'
@@ -293,8 +293,6 @@ def move():
     move_dict['move'] = min(direction, key=lambda x: x[0])[1]
 
     move_dict['taunt'] = ts.next()
-    if(data['turn'] == 500):
-        move_dict['color'] = 'green'
     return move_dict
 
 
