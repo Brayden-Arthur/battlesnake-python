@@ -33,7 +33,10 @@ taunts = ["\"eval(",
             "no bombs now",
             "Find hot snakes in your area ;)",
             "My Anaconda Don't",
-            ":ok_hand::eyes::fire::ok_hand::eyes: :100:NICE:100::fire::fire:FIRE:fire::fire:"]
+            "harambe died for nothing",
+            "I want Trump for food",
+            ".",
+            ]
 
 pyro = ["Casting Pyroblast",
         'Casting Pyroblast - 4.0',
@@ -214,7 +217,7 @@ def getDanger(x,y,grid):
     if isLegalTile(tile):
         danger = 0.0
         nearby = [(x,y,1)]
-        getNearbyTiles(grid, nearby, 1, 5);
+        getNearbyTiles(grid, nearby, 1, 10);
         for t in nearby:
             danger += grid[t[1]][t[0]].val * 2 * (0.2 ** t[2])
         return (danger / len(nearby))
@@ -299,8 +302,7 @@ def getMap(data):
 
     for food in data.get('food', []):
         grid[food[1]][food[0]] = Food()
-        grid[food[1]][food[0]].val = (grid[food[1]][food[0]].val * 100) / (Map.snakes[data['you']].health_points)
-
+        grid[food[1]][food[0]].val = (grid[food[1]][food[0]].val * 500) / (Map.snakes[data['you']].health_points)
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
@@ -346,7 +348,10 @@ def start():
         'color': 'green',
         'name': 'KING DODONGO',
         'taunt': 'INFERNAL DINOSAUR',
-        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png'
+        'head_url': 'https://zeldawiki.org/images/8/82/HWL_VS_Link_Icon.png',
+        'tail_type': "block-bum",
+        'head_type': "smile",
+        'secondary-colour': 'yellow'
     }
 
 def emergencyFoodCalc(data, head, snake, map):
@@ -392,7 +397,6 @@ def calc():
     snake = getSnake(data)
 
     map = getMap(data)
-    print(head)
     move = 'up'
     
     foodmove = emergencyFoodCalc(data, head, snake, map)
@@ -410,13 +414,10 @@ def calc():
     south = getDanger(head[0],head[1] + 1 , map)
     
     
-
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move = min(direction, key=lambda x: x[0])[1]
-    print(move)
 
-    taunt = tt.next()
-    print('end of move block##############')
+    taunt = ts.next()
     return {
         'move': move,
         'taunt': taunt
