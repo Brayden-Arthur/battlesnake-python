@@ -192,7 +192,7 @@ def getDanger(x,y,grid):
     if isLegalTile(tile):
         danger = 0.0
         nearby = [(x,y,1)]
-        getNearbyTiles(grid, nearby, 1, 10);
+        getNearbyTiles(grid, nearby, 1, 8);
         for t in nearby:
             danger += grid[t[1]][t[0]].val * 2 * (0.2 ** t[2])
         return (danger / len(nearby))
@@ -226,7 +226,7 @@ def getMap(data):
     for food in data.get('food', []):
         grid[food[1]][food[0]] = Food()
         grid[food[1]][food[0]].val = (grid[food[1]][food[0]].val * 2000) / (Map.snakes[data['you']].health_points)
-        print(grid[food[1]][food[0]].val)
+
     for y in range(len(grid)):
         for x in range(len(grid[y])):
             tile = grid[y][x]
