@@ -368,7 +368,7 @@ def emergencyFoodCalc(data, head, snake, map):
             pathing_point = [data['height'] // 2, data['width'] // 2]
 
         moveinfo = dfs(head, pathing_point, map)
-
+        print(moveinfo)
         if (moveinfo == None or moveinfo[2] == None):
             print("No path to food found")
             return None
