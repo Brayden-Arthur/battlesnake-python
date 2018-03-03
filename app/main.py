@@ -190,7 +190,7 @@ def getHead(data):
     head = []
     for snake in data['snakes']['data']:
         if(snake['id'] == snek['id']):
-            head = [snake['body']['data'][0]['y'],snake['body']['data'][0]['x']]
+            head = snake['body']['data'][0]
     return head
 
 def getNearbyTiles(grid, points, cur, total):
@@ -357,10 +357,9 @@ def start():
 def emergencyFoodCalc(data, head, snake, map):
     move = None
     if (snake['health'] < 75):
-
-        food = []
-        for i in range(0,len(data['food']['data'])):
-            food.append([data['food']['data'][i]['y'],data['food']['data'][i]['x']])
+        print("Need food now!")
+        print(data['food']['data'])
+        food = map(lambda x: [x['y'], x['x']], list(data['food']['data']))
         pathing_point = [0,0]
         if (len(food) > 0):
             pathing_point = min(food, key = lambda foodPoint: dist(head, foodPoint))
@@ -368,7 +367,7 @@ def emergencyFoodCalc(data, head, snake, map):
             pathing_point = [data['height'] // 2, data['width'] // 2]
 
         moveinfo = dfs(head, pathing_point, map)
-        print(moveinfo)
+
         if (moveinfo == None or moveinfo[2] == None):
             print("No path to food found")
             return None
@@ -378,15 +377,13 @@ def emergencyFoodCalc(data, head, snake, map):
             #print(moveinfo)
 
         pp = moveinfo[1]
-        print("pp:")
-        print(pp)
-        if (pp[1] == head[0] + 1 and pp[0] == head[1]):
+        if (pp[0] == head[0] and pp[1] == head[1] + 1):
             move = 'right'
-        elif (pp[1] == head[0] - 1 and pp[0] == head[1]):
+        elif (pp[0] == head[0] and pp[1] == head[1] - 1):
             move = 'left'
-        elif (pp[1] == head[0] and pp[0] == head[1] - 1):
+        elif (pp[0] == head[0] - 1 and pp[1] == head[1]):
             move = 'up'
-        elif (pp[1] == head[0] and pp[0] == head[1] + 1):
+        elif (pp[0] == head[0] + 1 and pp[1] == head[1]):
             move = 'down'
         else:
             print("WOAH!!!!! THIS IS A BUG")
@@ -412,10 +409,10 @@ def calc():
         }
 
 
-    west = getDanger(head[1] - 1,head[0], map)
-    east = getDanger(head[1] + 1,head[0], map)
-    north = getDanger(head[1],head[0] - 1 , map)
-    south = getDanger(head[1],head[0] + 1 , map)
+    west = getDanger(head['x'] - 1,head['y'], map)
+    east = getDanger(head['x'] + 1,head['y'], map)
+    north = getDanger(head['x'],head['y'] - 1 , map)
+    south = getDanger(head['x'],head['y'] + 1 , map)
 
     #print("DANGER==> N:",north,"S:",south,"W:",west,"E:",east)
 
