@@ -413,11 +413,13 @@ def calc():
     north = getDanger(head['x'],head['y'] - 1 , map)
     south = getDanger(head['x'],head['y'] + 1 , map)
 
+    print("DANGER==> N:",north,"S:",south,"W:",west,"E:",east)
 
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move_dict['move'] = min(direction, key=lambda x: x[0])[1]
 
     move_dict['taunt'] = ts.next()
+    print("move_dict:",move_dict)
     return move_dict
 
 @bottle.post('/move')
