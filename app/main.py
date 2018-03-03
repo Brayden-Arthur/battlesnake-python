@@ -190,7 +190,7 @@ def getHead(data):
     head = []
     for snake in data['snakes']['data']:
         if(snake['id'] == snek['id']):
-            head = snake['body']['data'][0]
+            head = [snake['body']['data'][0]['y'],snake['body']['data'][0]['x']]
     return head
 
 def getNearbyTiles(grid, points, cur, total):
