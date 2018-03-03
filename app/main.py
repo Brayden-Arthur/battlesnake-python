@@ -176,6 +176,7 @@ class Map(object):
     #danger = Danger()
 
 def isLegalTile(tile):
+    print(tile)
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getSnake(data):
