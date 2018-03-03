@@ -240,7 +240,6 @@ def inbounds(x, y, map):
 
 
 def dist(a, b):
-    print(a,b)
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def dfs(start, end, map):
@@ -358,8 +357,7 @@ def start():
 def emergencyFoodCalc(data, head, snake, map):
     move = None
     if (snake['health'] < 75):
-        print("Need food now!")
-        print(data['food']['data'])
+
         food = []
         for i in range(0,len(data['food']['data'])):
             food.append([data['food']['data'][i]['y'],data['food']['data'][i]['x']])
@@ -380,6 +378,8 @@ def emergencyFoodCalc(data, head, snake, map):
             #print(moveinfo)
 
         pp = moveinfo[1]
+        print("pp:")
+        print(pp)
         if (pp[0] == head[0] + 1 and pp[1] == head[1]):
             move = 'right'
         elif (pp[0] == head[0] - 1 and pp[1] == head[1]):
