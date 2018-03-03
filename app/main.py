@@ -380,14 +380,14 @@ def emergencyFoodCalc(data, head, snake, map):
         pp = moveinfo[1]
         print("pp:")
         print(pp)
-        if (pp[0] == head[0] + 1 and pp[1] == head[1]):
+        if (pp[0] == head[1] + 1 and pp[0] == head[1]):#x
             move = 'right'
-        elif (pp[0] == head[0] - 1 and pp[1] == head[1]):
+        elif (pp[0] == head[1] - 1 and pp[0] == head[1]):#x
             move = 'left'
-        elif (pp[0] == head[0] and pp[1] == head[1] - 1):
-            move = 'up'
-        elif (pp[0] == head[0] and pp[1] == head[1] + 1):
+        elif (pp[0] == head[1] and pp[0] == head[1] - 1):#y
             move = 'down'
+        elif (pp[0] == head[1] and pp[0] == head[1] + 1):#y may need to switch these
+            move = 'up'
         else:
             print("WOAH!!!!! THIS IS A BUG")
             print("head {} {}".format(head[0], head[1]))
