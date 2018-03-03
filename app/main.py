@@ -256,16 +256,15 @@ def dfs(start, end, map):
             return None
 
         for dd in [[0, 1], [0, -1], [1, 0], [-1, 0]]:#N,S,E,W
-            pp = [dd[0] + nextPoint[0], dd[1] + nextPoint[1]]
+            pp = [dd[1] + nextPoint[1], dd[0] + nextPoint[0]]
 
             if (pp[0] == end[0] and pp[1] == end[1]):
                 return (0, pp, nextData)
 
-            if (not inbounds(pp[0], pp[1], map)):
+            if (not inbounds(pp[0], pp[1], map)):#takes x,y
                 continue
-            if (not isLegalTile(map[pp[1]][pp[0]])):
+            if (not isLegalTile(map[pp[1]][pp[0]])):#takes a map of y,x
                 continue
-            print("food:",end,"dist:",dist(pp, end))
             addedTuple = (dist(pp, end), pp, nextData)
             #print("Adding point {} {} - value {}".format(addedTuple[1][0], addedTuple[1][1], addedTuple[0]))
             cost = visited.get(nextPoint[0] + nextPoint[1] * 1j, 0) + 1
