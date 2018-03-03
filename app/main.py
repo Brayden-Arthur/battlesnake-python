@@ -190,7 +190,7 @@ def getHead(data):
     head = []
     for snake in data['snakes']['data']:
         if(snake['id'] == snek['id']):
-            head = [snake['body']['data'][0]['x'],snake['body']['data'][0]['y']]
+            head = [snake['body']['data'][0]['y'],snake['body']['data'][0]['x']]
     return head
 
 def getNearbyTiles(grid, points, cur, total):
@@ -380,13 +380,13 @@ def emergencyFoodCalc(data, head, snake, map):
         pp = moveinfo[1]
         print("pp:")
         print(pp)
-        if (pp[0] == head[0] + 1 and pp[1] == head[1]):
+        if (pp[1] == head[0] + 1 and pp[0] == head[1]):
             move = 'right'
-        elif (pp[0] == head[0] - 1 and pp[1] == head[1]):
+        elif (pp[1] == head[0] - 1 and pp[0] == head[1]):
             move = 'left'
-        elif (pp[0] == head[0] and pp[1] == head[1] - 1):
+        elif (pp[1] == head[0] and pp[0] == head[1] - 1):
             move = 'up'
-        elif (pp[0] == head[0] and pp[1] == head[1] + 1):
+        elif (pp[1] == head[0] and pp[0] == head[1] + 1):
             move = 'down'
         else:
             print("WOAH!!!!! THIS IS A BUG")
