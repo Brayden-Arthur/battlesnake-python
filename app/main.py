@@ -240,6 +240,7 @@ def inbounds(x, y, map):
 
 
 def dist(a, b):
+    print(a,b)
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def dfs(start, end, map):
