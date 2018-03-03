@@ -412,10 +412,10 @@ def calc():
         }
 
 
-    west = getDanger(head['x'] - 1,head['y'], map)
-    east = getDanger(head['x'] + 1,head['y'], map)
-    north = getDanger(head['x'],head['y'] - 1 , map)
-    south = getDanger(head['x'],head['y'] + 1 , map)
+    west = getDanger(head[1] - 1,head[0], map)
+    east = getDanger(head[1] + 1,head[0], map)
+    north = getDanger(head[1],head[0] - 1 , map)
+    south = getDanger(head[1],head[0] + 1 , map)
 
     #print("DANGER==> N:",north,"S:",south,"W:",west,"E:",east)
 
