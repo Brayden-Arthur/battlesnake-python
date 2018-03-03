@@ -294,15 +294,15 @@ def getMap(data):
                 snakepart = snakeobj.body
             else:
                 snakepart = snakeobj.head
-            grid[coord['x']][coord['y']] = snakepart
+            grid[coord['y']][coord['x']] = snakepart
             hasBeenHead = True
 
     for wall in data.get('walls', []):
         grid[wall[1]][wall[0]] = Map.wall
 
     for food in data['food']['data']:
-        grid[food['x']][food['y']] = Food()
-        grid[food['x']][food['y']].val = (grid[food['x']][food['y']].val * 2000) / (data['you']['health'])
+        grid[food['y']][food['x']] = Food()
+        grid[food['y']][food['x']].val = (grid[food['y']][food['x']].val * 2000) / (data['you']['health'])
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
