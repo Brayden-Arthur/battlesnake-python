@@ -176,7 +176,6 @@ class Map(object):
     #danger = Danger()
 
 def isLegalTile(tile):
-    print(tile)
     return isinstance(tile, Danger) or isinstance(tile, Food) or isinstance(tile, Coin)
 
 def getSnake(data):
@@ -357,9 +356,9 @@ def start():
 
 def emergencyFoodCalc(data, head, snake, map):
     move = None
-    if (snake['health'] < 25):
+    if (snake['health'] < 75):
         print("Need food now!")
-	food = map(data['food']['data'], lambda x: [x['y'], x['x']])
+	food = map(lambda x: [x['y'], x['x']], data['food']['data'])
         pathing_point = [0,0]
         if (len(food) > 0):
             pathing_point = min(food, key = lambda foodPoint: dist(head, foodPoint))
@@ -414,13 +413,13 @@ def calc():
     north = getDanger(head['x'],head['y'] - 1 , map)
     south = getDanger(head['x'],head['y'] + 1 , map)
 
-    print("DANGER==> N:",north,"S:",south,"W:",west,"E:",east)
+    #print("DANGER==> N:",north,"S:",south,"W:",west,"E:",east)
 
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move_dict['move'] = min(direction, key=lambda x: x[0])[1]
 
     move_dict['taunt'] = ts.next()
-    print("move_dict:",move_dict)
+    #print("move_dict:",move_dict)
     return move_dict
 
 @bottle.post('/move')
