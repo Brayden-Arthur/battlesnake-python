@@ -255,7 +255,7 @@ def dfs(start, end, map):
         if (iter >= 3000):
             return None
 
-        for dd in [[0, 1], [0, -1], [1, 0], [-1, 0]]:
+        for dd in [[0, 1], [0, -1], [1, 0], [-1, 0]]:#N,S,E,W
             pp = [dd[0] + nextPoint[0], dd[1] + nextPoint[1]]
 
             if (pp[0] == end[0] and pp[1] == end[1]):
@@ -265,7 +265,7 @@ def dfs(start, end, map):
                 continue
             if (not isLegalTile(map[pp[1]][pp[0]])):
                 continue
-            print("food":end,"dist:",dist(pp, end))
+            print("food:"end,"dist:",dist(pp, end))
             addedTuple = (dist(pp, end), pp, nextData)
             #print("Adding point {} {} - value {}".format(addedTuple[1][0], addedTuple[1][1], addedTuple[0]))
             cost = visited.get(nextPoint[0] + nextPoint[1] * 1j, 0) + 1
