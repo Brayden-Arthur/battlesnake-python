@@ -180,8 +180,8 @@ def isLegalTile(tile):
 
 def getSnake(data):
     snek = data['you']
-    for snake in data['snakes']:
-        if(str(snake['id']) == str(snek)):
+    for snake in data['snakes']['data']:
+        if(snake['id'] == snek['id']):
             return snake
     return None
 
