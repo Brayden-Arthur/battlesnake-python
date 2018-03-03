@@ -295,7 +295,7 @@ def getMap(data):
                 snakepart = snakeobj.body
             else:
                 snakepart = snakeobj.head
-            grid[coord[1]][coord[0]] = snakepart
+            grid[coord['x']][coord['y']] = snakepart
             hasBeenHead = True
 
     for wall in data.get('walls', []):
