@@ -190,7 +190,7 @@ def getHead(data):
     head = []
     for snake in data['snakes']['data']:
         if(snake['id'] == snek['id']):
-            head = snake['body']['data'][0]
+            head = [snake['body']['data'][0]['y'],snake['body']['data'][0]['x']]
     return head
 
 def getNearbyTiles(grid, points, cur, total):
@@ -357,9 +357,11 @@ def start():
 def emergencyFoodCalc(data, head, snake, map):
     move = None
     if (snake['health'] < 75):
-        print("Need food now!")
+        food = []
         print(data['food']['data'])
-        food = map(lambda x: [x['y'], x['x']], list(data['food']['data']))
+        for i in range(0,len(data['food']['data'])):
+            food = map(lambda x: [x['y'], x['x']], list(data['food']['data']))
+            food.append([data['food']['data'][i]['y'],data['food']['data'][i]['x']])
         pathing_point = [0,0]
         if (len(food) > 0):
             pathing_point = min(food, key = lambda foodPoint: dist(head, foodPoint))
