@@ -198,9 +198,7 @@ def getNearbyTiles(grid, points, cur, total):
         return
     for point in filter(lambda p: p[2] == cur, points):
         dd = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-        print(grid)
         for d in filter(lambda x: point[1]+x[0] >= 0 and point[1]+x[0] < len(grid) and point[0]+x[1] >= 0 and point[0]+x[1] < len(grid[0]), dd):
-            print("point&d:",point,d)
             tile = grid[point[1]+d[0]][point[0]+d[1]]
             if not isLegalTile(tile):
                 continue
