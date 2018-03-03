@@ -288,7 +288,7 @@ def getMap(data):
         snakeobj =  Snake(snake['id'], snake['name'], snake['body']['data'], snake['health'])
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
-        for coord in snake['coords']:
+        for coord in snake['body']['data']:
             snakepart = None
             if hasBeenHead:
                 snakepart = snakeobj.body
