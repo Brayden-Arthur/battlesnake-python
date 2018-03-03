@@ -282,11 +282,10 @@ def dfs(start, end, map):
 
 def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
-    print(data)
     width = data['width']
     height = data['height']
-    for snake in data['snakes']:
-        snakeobj =  Snake(snake['id'], snake['name'], snake['coords'], snake['health_points'])
+    for snake in data['snakes']['data']:
+        snakeobj =  Snake(snake['id'], snake['name'], snake['body']['data'], snake['health'])
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
         for coord in snake['coords']:
