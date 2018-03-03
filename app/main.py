@@ -289,7 +289,6 @@ def getMap(data):
         Map.snakes[snake['id']] = snakeobj
         hasBeenHead = False
         for coord in snake['body']['data']:
-            print(coord)
             snakepart = None
             if hasBeenHead:
                 snakepart = snakeobj.body
@@ -301,9 +300,9 @@ def getMap(data):
     for wall in data.get('walls', []):
         grid[wall[1]][wall[0]] = Map.wall
 
-    for food in data.get('food', []):
-        grid[food[1]][food[0]] = Food()
-        grid[food[1]][food[0]].val = (grid[food[1]][food[0]].val * 2000) / (Map.snakes[data['you']].health_points)
+    for food in data['food']['data']:
+        grid[food['x']][food['y']] = Food()
+        grid[food['x']][food['y']].val = (grid[food['x']][food['y']].val * 2000) / (Map.snakes[data['you']].health_points)
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
