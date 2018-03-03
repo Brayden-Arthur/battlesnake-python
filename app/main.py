@@ -302,7 +302,7 @@ def getMap(data):
 
     for food in data['food']['data']:
         grid[food['x']][food['y']] = Food()
-        grid[food['x']][food['y']].val = (grid[food['x']][food['y']].val * 2000) / (Map.snakes[data['you']].health_points)
+        grid[food['x']][food['y']].val = (grid[food['x']][food['y']].val * 2000) / (data['you']['health'])
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
