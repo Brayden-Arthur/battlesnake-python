@@ -282,6 +282,7 @@ def dfs(start, end, map):
 
 def getMap(data):
     grid = [[Danger(0) for x in range(data["width"])] for y in range(data["height"])]
+    print(data)
     width = data['width']
     height = data['height']
     for snake in data['snakes']:
