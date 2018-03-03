@@ -129,12 +129,12 @@ class Danger(object):
 
 
 class Snake(object):
-    def __init__(self, id, name, coords, health_points):
+    def __init__(self, id, name, coords, health):
         self.id = id
         self.name = name
         self.head = SnakePart(self, True)
         self.body = SnakePart(self, False)
-        self.health_points = health_points
+        self.health = health
         self.coords = coords
     def __str__(self):
         return self.name
@@ -356,7 +356,7 @@ def start():
 
 def emergencyFoodCalc(data, head, snake, map):
     move = None
-    if (snake['health_points'] < 25):
+    if (snake['health'] < 25):
         print("Need food now!")
         food = data.get('food', [])
         pathing_point = [0,0]
