@@ -356,7 +356,7 @@ def start():
 
 def emergencyFoodCalc(data, head, snake, map):
     move = None
-    if (snake['health'] < 25):
+    if (snake['health'] < 75):
         print("Need food now!")
 	food = map(data['food']['data'], lambda x: [x['y'], x['x']])
         pathing_point = [0,0]
