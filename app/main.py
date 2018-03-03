@@ -265,7 +265,6 @@ def dfs(start, end, map):
                 continue
             if (not isLegalTile(map[pp[0]][pp[1]])):
                 continue
-            print("food:",end,"dist:",dist(pp, end))
             addedTuple = (dist(pp, end), pp, nextData)
             #print("Adding point {} {} - value {}".format(addedTuple[1][0], addedTuple[1][1], addedTuple[0]))
             cost = visited.get(nextPoint[0] + nextPoint[1] * 1j, 0) + 1
