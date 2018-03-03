@@ -360,7 +360,6 @@ def emergencyFoodCalc(data, head, snake, map):
         food = []
         print(data['food']['data'])
         for i in range(0,len(data['food']['data'])):
-            food = map(lambda x: [x['y'], x['x']], list(data['food']['data']))
             food.append([data['food']['data'][i]['y'],data['food']['data'][i]['x']])
         pathing_point = [0,0]
         if (len(food) > 0):
