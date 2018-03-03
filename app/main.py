@@ -356,7 +356,7 @@ def start():
 
 def emergencyFoodCalc(data, head, snake, map):
     move = None
-    if (snake['health'] < 75):
+    if (snake['health'] < 25):
         food = []
         print(data['food']['data'])
         for i in range(0,len(data['food']['data'])):
