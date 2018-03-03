@@ -189,7 +189,8 @@ def getHead(data):
     print(data)
     snek = data['you']
     head = []
-    for snake in data['snakes']:
+    for snake in data['snakes']['data']:
+        print(snake)
         if(str(snake['id']) == str(snek)):
             head = snake['coords'][0]
     return head
