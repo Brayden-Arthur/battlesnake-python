@@ -375,8 +375,8 @@ def emergencyFoodCalc(data, head, snake, map):
 
         while(moveinfo[2] != None and  moveinfo[2][2] != None):
             moveinfo = moveinfo[2]
-            #print(moveinfo)
 
+        print(moveinfo)    
         pp = moveinfo[1]
         print("pp:")
         print(pp)
