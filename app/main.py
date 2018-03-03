@@ -186,11 +186,11 @@ def getSnake(data):
     return None
 
 def getHead(data):
-    print(data)
     snek = data['you']
     head = []
+    print("snek:",snek)
     for snake in data['snakes']['data']:
-        print(snake,snek)
+        print("snake:",snake)
         if(str(snake['id']) == str(snek)):
             head = snake['coords'][0]
     return head
