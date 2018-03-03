@@ -186,6 +186,7 @@ def getSnake(data):
     return None
 
 def getHead(data):
+    print(data)
     snek = data['you']
     head = []
     for snake in data['snakes']:
