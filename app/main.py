@@ -365,7 +365,7 @@ def emergencyFoodCalc(data, head, snake, map):
     move = None
     if (snake['health'] < 25):
         food = []
-        print(data['food']['data'])
+        #print(data['food']['data'])
         for i in range(0,len(data['food']['data'])):
             food.append([data['food']['data'][i]['y'],data['food']['data'][i]['x']])
         pathing_point = [0,0]
@@ -377,16 +377,16 @@ def emergencyFoodCalc(data, head, snake, map):
         moveinfo = dfs(head, pathing_point, map)
 
         if (moveinfo == None or moveinfo[2] == None):
-            print("No path to food found")
+            #print("No path to food found")
             return None
 
         while(moveinfo[2] != None and  moveinfo[2][2] != None):
             moveinfo = moveinfo[2]
 
-        print(moveinfo)
+        #print(moveinfo)
         pp = moveinfo[1]
-        print("pp:")
-        print(pp)
+        #print("pp:")
+        #print(pp)
         if (pp[1] == head[1] + 1 and pp[0] == head[0]):#x
             move = 'right'
         elif (pp[1] == head[1] - 1 and pp[0] == head[0]):#x
@@ -396,13 +396,13 @@ def emergencyFoodCalc(data, head, snake, map):
         elif (pp[1] == head[1] and pp[0] == head[0] + 1):#y may need to switch these
             move = 'down'
         else:
-            print("WOAH!!!!! THIS IS A BUG")
-            print("head {} {}".format(head[0], head[1]))
+            #print("WOAH!!!!! THIS IS A BUG")
+            #print("head {} {}".format(head[0], head[1]))
             move = 'down'
     return move
 
 def calc():
-    print('start of move block***********')
+    #print('start of move block***********')
     data = bottle.request.json
     head = getHead(data)
     move_dict = {}
@@ -412,7 +412,7 @@ def calc():
 
     foodmove = emergencyFoodCalc(data, head, snake, map)
     if (foodmove != None):
-        print("Emergency food move {}".format(foodmove))
+        #print("Emergency food move {}".format(foodmove))
         return {
             'move': foodmove,
             'taunt': 'I NEED FOOD'
