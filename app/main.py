@@ -65,7 +65,7 @@ def tauntSeq(taunts):
 	while True:
 		yield taunts[i // 5]
 		i = i + 1
-		if i >= len(taunts):
+		if (i // 5) >= len(taunts):
 			i = 0
 
 def tauntTicker(str):
