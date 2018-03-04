@@ -33,15 +33,15 @@ taunts = ["\"eval(",
             'Casting Pyroblast - -NaN',
             'Casting Pyroblast - -Inf',
             "ls; cd..; ls; cd ..; ls; cd ..",
-            "sudo rm -rf --no-preserve-root /"
+            "sudo rm -rf --no-preserve-root /",
             "[Object object]",
             "42",
             "); DROP TABLE SNAKES",
             "420 blaze it",
-            "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
+            "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",
             "CLICK TO WIN FREE CRUISE!!!!!",
             "Find hot snakes in your area ;)",
-            "10 funny snake videos, you won't believe #2"
+            "10 funny snake videos, you won't believe #2",
             "My Anaconda Don't",
             "I want Trump for food",
             ]
