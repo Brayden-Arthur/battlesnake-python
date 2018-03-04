@@ -21,21 +21,29 @@ def time_limit(seconds):
         signal.alarm(0)
 
 taunts = ["\"eval(",
+            "Casting Pyroblast",
+            'Casting Pyroblast - 4.0',
+            'Casting Pyroblast - 3.0',
+            'Casting Pyroblast - 2.0',
+            'Casting Pyroblast - 1.0',
+            'BOOOOOM!!!!!',
+            'Casting Pyroblast - -1.0',
+            'Casting Pyroblast - -2.0',
+            'Casting Pyroblast - -3.0???',
+            'Casting Pyroblast - -NaN',
+            'Casting Pyroblast - -Inf',
+            "ls; cd..; ls; cd ..; ls; cd ..",
+            "sudo rm -rf --no-preserve-root /"
             "[Object object]",
             "42",
             "); DROP TABLE SNAKES",
             "420 blaze it",
             "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
-            "#yolo",
-            "potato",
-            "Casting Pyroblast",
             "CLICK TO WIN FREE CRUISE!!!!!",
-            "no bombs now",
             "Find hot snakes in your area ;)",
+            "10 funny snake videos, you won't believe #2"
             "My Anaconda Don't",
-            "harambe died for nothing",
             "I want Trump for food",
-            ".",
             ]
 
 pyro = ["Casting Pyroblast",
@@ -55,7 +63,7 @@ def tauntPyro():
 def tauntSeq(taunts):
 	i = 0
 	while True:
-		yield taunts[i]
+		yield taunts[i // 5]
 		i = i + 1
 		if i >= len(taunts):
 			i = 0
@@ -198,7 +206,7 @@ def getNearbyTiles(grid, points, cur, total):
         return
     for point in filter(lambda p: p[2] == cur, points):
         dd = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-        for d in filter(lambda x: point[1]+x[0] >= 0 and point[1]+x[0] < len(grid[0]) and point[0]+x[1] >= 0 and point[0]+x[1] < len(grid), dd):
+        for d in filter(lambda x: point[1]+x[0] >= 0 and point[1]+x[0] < len(grid) and point[0]+x[1] >= 0 and point[0]+x[1] < len(grid), dd):
             tile = grid[point[1]+d[0]][point[0]+d[1]]
             if not isLegalTile(tile):
                 continue
