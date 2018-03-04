@@ -206,7 +206,7 @@ def getNearbyTiles(grid, points, cur, total):
         return
     for point in filter(lambda p: p[2] == cur, points):
         dd = [[-1, 0], [1, 0], [0, -1], [0, 1]]
-        for d in filter(lambda x: point[1]+x[0] >= 0 and point[1]+x[0] < len(grid) and point[0]+x[1] >= 0 and point[0]+x[1] < len(grid), dd):
+        for d in filter(lambda x: point[1]+x[0] >= 0 and point[1]+x[0] < len(grid) and point[0]+x[1] >= 0 and point[0]+x[1] < len(grid[0]), dd):
             tile = grid[point[1]+d[0]][point[0]+d[1]]
             if not isLegalTile(tile):
                 continue
@@ -263,15 +263,15 @@ def dfs(start, end, map):
         if (iter >= 3000):
             return None
 
-        for dd in [[0, 1], [0, -1], [1, 0], [-1, 0]]:#
+        for dd in [[0, 1], [0, -1], [1, 0], [-1, 0]]:#N,S,E,W
             pp = [dd[0] + nextPoint[0], dd[1] + nextPoint[1]]
 
             if (pp[0] == end[0] and pp[1] == end[1]):
                 return (0, pp, nextData)
 
-            if (not inbounds(pp[1], pp[0], map)):
+            if (not inbounds(pp[1], pp[0], map)):#takes x,y
                 continue
-            if (not isLegalTile(map[pp[0]][pp[1]])):
+            if (not isLegalTile(map[pp[0]][pp[1]])):#takes a map of y,x
                 continue
             addedTuple = (dist(pp, end), pp, nextData)
             #print("Adding point {} {} - value {}".format(addedTuple[1][0], addedTuple[1][1], addedTuple[0]))
