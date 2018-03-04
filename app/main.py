@@ -429,7 +429,8 @@ def calc():
     direction = [(north, 'up'), (east, 'right'), (west, 'left'), (south, 'down')]
     move_dict['move'] = min(direction, key=lambda x: x[0])[1]
 
-    move_dict['taunt'] = ts.next()
+    turn = data['turn']
+    move_dict['taunt'] = taunts[(turn // 5) % len(taunts)]
     #print("move_dict:",move_dict)
     return move_dict
 
